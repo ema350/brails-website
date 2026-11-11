@@ -1,0 +1,134 @@
+<!--@head title="Brails — Move money from Nigeria to the world" desc="One account for businesses to hold NGN, USD, GBP, EUR, USDC and USDT, convert at live rates, and pay suppliers abroad straight to their local bank."-->
+<!--@nav active=""-->
+
+<section class="hero-l">
+  <div class="container">
+    <div class="hero-card">
+      <img class="hero-bg" src="assets/img/lagos.jpg" alt="A business owner on a busy Lagos street checking a payment on their phone" fetchpriority="high">
+      <div class="hero-copy">
+        <span class="pill-new" data-reveal><b>New</b> Now paying out to Vietnam</span>
+        <h1 class="display-xl" data-split>Move money from<br>Nigeria to the world.</h1>
+        <p data-reveal style="--d:.25s">Brails gives businesses one account to hold NGN, USD, GBP, EUR, USDC and USDT, convert at live rates, and pay suppliers in the US, UK, Canada, China and Australia straight to their local bank.</p>
+        <div class="btn-row" data-reveal style="--d:.35s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-secondary" href="{{SALES}}">Talk to sales</a></div>
+      </div>
+      <div class="payout-card" data-reveal style="--d:.5s" aria-label="Sample payout">
+        <div class="pc-head">
+          <div class="pc-payee"><span class="avatar">HP</span><div><strong>Paying Harbor &amp; Pine LLC</strong><small>Sample payout · United States</small></div></div>
+          <span class="live"><i></i>Live</span>
+        </div>
+        <div class="pc-amount">$18,400.00</div>
+        <div class="track"><i></i></div>
+        <div class="pc-stops"><span>Funded</span><span>Converted</span><span>Delivered</span></div>
+        <div class="pc-done">{{icon:checkCircle}} Delivered to local bank</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0" id="products" style="padding-top:48px">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <div><p class="eyebrow">Products</p><h2 class="h2" style="color:var(--heading)">One place to run your money abroad.</h2></div>
+      <p class="lede">Use them together or on their own, every product lives in the same dashboard and the same API.</p>
+    </div>
+    <div class="products" data-stagger>
+      <a class="product" href="cross-border-payments.html">
+        <div class="product-img"><img src="assets/img/container.jpg" alt="A gloved hand opening a shipping container" loading="lazy"><span class="chip"><i class="dot"></i>NGN → USD <span>Delivered</span></span></div>
+        <div class="product-body"><span class="num">01</span><h3 class="h3">Cross-border payments</h3><p>Pay suppliers and partners in the US, UK, Canada, Australia, China and across Africa straight to their local bank account.</p><span class="link">Explore payments {{icon:arrow}}</span></div>
+      </a>
+      <a class="product" href="multi-currency-wallets.html">
+        <div class="product-img"><img src="assets/img/beads.jpg" alt="Hands sorting coloured beads in a carved wooden tray" loading="lazy"><span class="chip"><i class="dot"></i>6 balances <span>One account</span></span></div>
+        <div class="product-body"><span class="num">02</span><h3 class="h3">Multi-currency wallets</h3><p>Hold USD, EUR, GBP, NGN, USDC and USDT side by side, and swap between them at live rates in a few clicks.</p><span class="link">Explore wallets {{icon:arrow}}</span></div>
+      </a>
+      <a class="product" href="smes.html">
+        <div class="product-img"><img src="assets/img/portrait-laptop.jpg" alt="A business owner working on a laptop in a modern office" loading="lazy"><span class="chip"><i class="dot"></i>Owner · Admin · Member <span>Team access</span></span></div>
+        <div class="product-body"><span class="num">03</span><h3 class="h3">Brails for SMEs</h3><p>Everything a growing business needs to trade abroad: team roles, a full activity log, statements and shareable receipts.</p><span class="link">Explore SMEs {{icon:arrow}}</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!--@ticker-->
+
+<section class="section how" data-how>
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <div><p class="eyebrow">How it works</p><h2 class="h2" style="color:var(--heading)" data-split>From funded to delivered<br>in four stops.</h2></div>
+      <p class="lede">Every payment travels the same line, and you can see exactly where it is at each stop.</p>
+    </div>
+    <div class="rail" aria-hidden="true">
+      <div class="rail-line"></div><div class="rail-progress"></div>
+      <div class="rail-stops"><div class="stop"><span>1</span></div><div class="stop"><span>2</span></div><div class="stop"><span>3</span></div><div class="stop"><span>4</span></div></div>
+      <i class="rail-dot"></i>
+    </div>
+    <ol class="steps" data-stagger>
+      <li class="step"><span class="step-ic">{{icon:bank}}</span><h3>Fund your wallet</h3><p>Top up by bank transfer into your dedicated virtual account, or deposit USDC and USDT.</p><span class="tag">Virtual account · NGN</span></li>
+      <li class="step"><span class="step-ic">{{icon:swap}}</span><h3>Hold or convert</h3><p>Keep balances in USD, EUR, GBP, NGN or stablecoins and swap between them at live rates.</p><span class="tag">NGN ⇄ USD</span></li>
+      <li class="step"><span class="step-ic">{{icon:send}}</span><h3>Send money</h3><p>Pay saved beneficiaries abroad straight to their local bank, in their own currency.</p><span class="tag">To Harbor &amp; Pine LLC</span></li>
+      <li class="step"><span class="step-ic">{{icon:trend}}</span><h3>Track every step</h3><p>Follow each payment’s status in real time, export statements and share receipts.</p><span class="tag">Delivered · receipt ready</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section-navy" id="developers">
+  <div class="container dev-cols">
+    <div class="copy-stack on-dark" data-reveal>
+      <p class="eyebrow on-dark" style="margin-bottom:0">Developers</p>
+      <h2 class="h2">One API for payouts and wallets.</h2>
+      <p class="lede" style="font-size:18px">Build payments into your product without stitching together providers. Everything in the dashboard is available by API.</p>
+      <ul class="ticks">
+        <li>{{icon:checkCircle}} Webhooks for every event</li>
+        <li>{{icon:checkCircle}} API key management and IP whitelisting</li>
+        <li>{{icon:checkCircle}} Customer API access for platforms</li>
+      </ul>
+      <div class="btn-row" style="padding-top:8px"><a class="btn btn-primary" href="developers.html">Read API docs</a></div>
+    </div>
+    <div class="code-win" data-type data-reveal style="--d:.15s">
+      <div class="code-bar"><i></i><i></i><i></i><span class="code-tab">POST /payouts</span><span class="code-meta">Illustrative request</span></div>
+      <template data-src="node"><span class="k">const</span> payout = <span class="k">await</span> brails.payouts.<span class="p">create</span>({
+  source_wallet: <span class="s">"NGN"</span>,
+  amount: <span class="n">18400.00</span>,
+  currency: <span class="s">"USD"</span>,
+  beneficiary: <span class="s">"ben_harbor_pine"</span>,
+});
+
+<span class="c">// → status: "processing"</span></template>
+      <pre class="code-body"></pre>
+      <div class="feed" data-feed>
+        <div class="feed-h"><span>Webhook events</span><span class="listen"><i class="dot"></i>Listening</span></div>
+        <div class="evt"><b><i class="dot g"></i>wallet.funded</b><small>NGN · 200 OK</small></div>
+        <div class="evt"><b><i class="dot g"></i>swap.completed</b><small>NGN → USD</small></div>
+        <div class="evt"><b><i class="dot y"></i>payout.processing</b><small>USD 18,400.00</small></div>
+        <div class="evt"><b><i class="dot b"></i>payout.completed</b><small>Delivered</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="container sec-cols">
+    <div class="copy-stack" data-reveal>
+      <p class="eyebrow" style="margin-bottom:0">Security &amp; compliance</p>
+      <h2 class="h2" style="color:var(--heading);font-size:clamp(36px,4.2vw,60px)" data-split>Licensed, verified<br>and locked down.</h2>
+      <p class="lede" style="font-size:18px;max-width:560px">Regulated in Nigeria and the United States, independently certified for security and quality, and built with the controls a finance team expects.</p>
+      <div class="badges">
+        <img class="tall" src="assets/img/iso-9001.jpg" alt="ISO 9001 certified" loading="lazy">
+        <img src="assets/img/iso-27001.jpg" alt="ISO/IEC 27001 certified" loading="lazy" style="height:48px">
+        <img src="assets/img/pci-dss.jpg" alt="PCI DSS compliant" loading="lazy">
+      </div>
+      <div class="lic-row">
+        <div class="lic"><strong>IMTO licence</strong><small>Central Bank of Nigeria</small></div>
+        <div class="lic"><strong>Registered MSB</strong><small>FinCEN, United States</small></div>
+      </div>
+    </div>
+    <div class="sec-list" data-stagger>
+      <div><span class="sec-ic">{{icon:shieldCheck}}</span><div><h3>KYB &amp; KYC</h3><p>Every business is verified before it can move money, and requests for information are answered right inside the dashboard.</p></div></div>
+      <div><span class="sec-ic">{{icon:lock}}</span><div><h3>2FA + passkeys</h3><p>Sign in with two-factor authentication or a passkey, and confirm every payout with your transaction PIN.</p></div></div>
+      <div><span class="sec-ic">{{icon:users}}</span><div><h3>Access control</h3><p>Owner, admin and member roles, a full activity log and IP whitelisting keep every action accountable.</p></div></div>
+      <div><span class="sec-ic">{{icon:database}}</span><div><h3>Data protection</h3><p>Information security certified to ISO/IEC 27001 and PCI DSS compliant, so sensitive details stay protected.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!--@cta-->
+<!--@footer-->

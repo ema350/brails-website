@@ -1,0 +1,159 @@
+<!--@head title="Multi-currency wallets — Brails" desc="Hold USD, EUR, GBP and NGN next to USDC and USDT in one Brails account, and convert when the rate suits you."-->
+<!--@nav active="products"-->
+
+<section class="phero phero-blue">
+  <div class="container phero-grid">
+    <div class="phero-copy">
+      <div class="crumbs" data-reveal><span>Products</span><i>/</i><span class="pill">{{icon:wallet}} Multi-currency wallets</span></div>
+      <h1 class="display-l" data-split>Multiple wallets.<br>One business.</h1>
+      <p class="lede" data-reveal style="--d:.2s">Hold USD, EUR, GBP and NGN next to USDC and USDT. Convert when the rate suits you, not when a payment forces your hand.</p>
+      <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
+      <div class="stats" data-stagger>
+        <div class="stat"><strong data-count="6">6</strong><span>currencies, one account</span></div>
+        <div class="stat"><strong data-count="2">2</strong><span>stablecoins next to fiat</span></div>
+        <div class="stat"><strong>Live</strong><span>rates on every swap</span></div>
+      </div>
+    </div>
+    <div class="wt" data-wt data-reveal style="--d:.15s" role="img" aria-label="Animated walkthrough of the Brails wallets screen switching between USD, NGN and KES balances">
+      <div class="wt-bar"><i></i><i></i><i></i><span class="wt-url">app.onbrails.com/wallets</span></div>
+      <div class="wt-view">
+        <div class="wt-cam">
+          <div class="dash">
+            <aside class="dash-side">
+              <div class="dash-org"><span class="avatar">AG</span><div><b>Alte Group</b><small>Business ID: 234098</small></div></div>
+              <a>{{icon:building}} Home</a>
+              <a class="on">{{icon:wallet}} Wallets</a>
+              <a>{{icon:swap}} Transactions</a>
+              <a>{{icon:users}} Beneficiaries</a>
+              <a>{{icon:person}} Customers</a>
+              <p>PRODUCTS</p>
+              <a>{{icon:bank}} Virtual accounts</a>
+              <p>UTILITIES</p>
+              <a>{{icon:key}} Settings</a>
+              <a>{{icon:users}} Team management</a>
+              <a>{{icon:code}} Developers</a>
+              <a>{{icon:help}} Help and support</a>
+            </aside>
+            <div class="dash-main">
+              <h4>Wallets</h4>
+              <p>Monitor your active balances and manage wallet funds.</p>
+              <div class="wtabs"><span class="on" data-tab>{{flag:US}}USD</span><span data-tab>{{flag:NG}}NGN</span><span data-tab>{{flag:KE}}KES</span></div>
+              <div class="wcards">
+                <div class="wcard wbal wt-swap" data-bal><small><span data-k="ccy">USD</span>&nbsp;Wallet balance {{icon:eye}}</small><strong><span data-k="bal">$900,291,700</span><sup data-k="cents">.00</sup></strong></div>
+                <div class="wcard wact"><span class="wi">{{icon:arrowDown}}</span><b>Deposit</b><small>Fund your account</small></div>
+                <div class="wcard wact"><span class="wi">{{icon:send}}</span><b>Send</b><small>Transfer funds</small></div>
+                <div class="wcard wact"><span class="wi">{{icon:swap}}</span><b>Swap</b><small>Convert currencies</small></div>
+              </div>
+              <div class="wtable" data-table>
+                <div class="wtable-h"><b class="wt-swap"><span data-k="ccy">USD</span> transactions</b><span>{{icon:filter}} Filters</span></div>
+                <table><thead><tr><th>Transaction ID</th><th>Date</th><th>Amount</th><th>Currency</th><th>Action</th><th>Wallet</th><th>Status</th></tr></thead><tbody class="wt-swap" data-k="rows"></tbody></table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <svg class="pointer" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 2L19 10.5L11.5 12.5L8 20L3 2Z" fill="#000d2f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <script type="application/json">[
+        {"code":"USD","bal":"$900,291,700","rows":[["+100,000","dep","ok"],["-2,000","snd","fail"],["+15,000","swp","pend"],["-5,000","snd","ok"],["+30,000","swp","ok"],["-1,000","snd","ok"]]},
+        {"code":"NGN","bal":"₦40,124,500","rows":[["+4,800,000","dep","ok"],["-250,000","snd","fail"],["+1,500,000","swp","pend"],["-600,000","snd","ok"],["+3,200,000","swp","ok"],["-120,000","snd","ok"]]},
+        {"code":"KES","bal":"KSh 2,480,000","rows":[["+350,000","dep","ok"],["-20,000","snd","fail"],["+120,000","swp","pend"],["-45,000","snd","ok"],["+260,000","swp","ok"],["-9,000","snd","ok"]]}
+      ]</script>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <div style="max-width:860px"><p class="eyebrow">How wallets work</p><h2 class="h2" data-split>Everything in, everything out,<br>one balance in the middle.</h2></div>
+      <p class="lede">Wallets aren’t a process to follow. They’re the place the money sits while you decide what to do with it.</p>
+    </div>
+    <div class="flow" data-reveal>
+      <div class="flow-col">
+        <div class="node"><div class="node-top"><span class="io in">IN</span><b>Virtual account</b></div><small>Bank transfer</small></div>
+        <div class="node"><div class="node-top"><span class="io in">IN</span><b>Deposit address</b></div><small>USDC and USDT</small></div>
+        <div class="node"><div class="node-top"><span class="io in">IN</span><b>Another Brails business</b></div><small>Internal transfer</small></div>
+      </div>
+      <div class="wires" aria-hidden="true"><div class="wire in"><i></i></div><div class="wire in"><i style="--dl:.9s"></i></div><div class="wire in"><i style="--dl:1.8s"></i></div></div>
+      <div class="hub" data-cycle=".ccys span" data-ms="1200">
+        <small>YOUR BRAILS WALLET</small>
+        <strong>One balance,<br>six currencies</strong>
+        <div class="ccys"><span class="is-on">NGN</span><span>USD</span><span>GBP</span><span>EUR</span><span>USDC</span><span>USDT</span></div>
+      </div>
+      <div class="wires" aria-hidden="true"><div class="wire out"><i style="--dl:.4s"></i></div><div class="wire out"><i style="--dl:1.3s"></i></div><div class="wire out"><i style="--dl:2.2s"></i></div></div>
+      <div class="flow-col">
+        <div class="node"><div class="node-top"><span class="io out">OUT</span><b>Cross-border payouts</b></div><small>10 destinations</small></div>
+        <div class="node"><div class="node-top"><span class="io out">OUT</span><b>Internal transfers</b></div><small>To another Brails business</small></div>
+        <div class="node"><div class="node-top"><span class="io out">OUT</span><b>Swaps</b></div><small>Currency to currency</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-grey">
+  <div class="container cols">
+    <div class="panel" data-reveal>
+      <div class="panel-h"><h3>Ways to receive</h3></div>
+      <div class="va-row">{{flag:NG:md}}<div class="va-txt"><b>NGN virtual account</b><small>Bank transfer · credited to your NGN wallet</small></div><span class="va-val">0123 •••• 4821 <button data-copy="0123 •••• 4821" aria-label="Copy account number">{{icon:copy}}</button></span></div>
+      <div class="va-row">{{flag:US:md}}<div class="va-txt"><b>USD balance</b><small>Receive from customers and partners abroad</small></div><span class="va-val" style="color:var(--green-d);font-family:var(--sans);font-weight:600">Available now</span></div>
+      <div class="va-row"><span class="coin" style="background:#2775ca">$</span><div class="va-txt"><b>USDC deposit address</b><small>On-chain · generated for this wallet</small></div><span class="va-val">0x7a3f…c21e <button data-copy="0x7a3f…c21e" aria-label="Copy deposit address">{{icon:copy}}</button></span></div>
+      <div class="toast" data-toast><i class="dot"></i>virtual_account.credited <span style="color:var(--green)">+₦4,800,000.00</span></div>
+    </div>
+    <div class="copy-stack" data-reveal style="--d:.15s">
+      <p class="eyebrow" style="margin-bottom:0">Virtual accounts</p>
+      <h2 class="h2">A bank account number of your own.</h2>
+      <p class="lede" style="font-size:18px;max-width:none">Virtual accounts give your business real details to receive into, so incoming funds land in the right wallet without a manual step on your side.</p>
+      <ul class="ticks bright">
+        <li>{{icon:checkCircle}} Account numbers generated per currency</li>
+        <li>{{icon:checkCircle}} Incoming funds credited straight to the wallet</li>
+        <li>{{icon:checkCircle}} Every deposit in your transaction history</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy">
+  <div class="container cols">
+    <div class="copy-stack on-dark" data-reveal>
+      <p class="eyebrow on-dark" style="margin-bottom:0">Stablecoins</p>
+      <h2 class="h2">Stablecoins that behave like any other balance.</h2>
+      <p class="lede" style="font-size:18px;max-width:none">USDC and USDT sit in the same wallet view as your fiat, with the same history and the same export. No separate tool, no separate login.</p>
+      <ul class="ticks bright">
+        <li>{{icon:checkCircle}} Deposit addresses generated per wallet</li>
+        <li>{{icon:checkCircle}} Balances shown next to your fiat</li>
+        <li>{{icon:checkCircle}} Every movement in the same transaction history</li>
+      </ul>
+    </div>
+    <div class="panel panel-dark" data-reveal style="--d:.15s">
+      <div class="panel-h"><h3>Transaction history</h3><button class="export">Export</button></div>
+      <div data-stagger style="display:grid;gap:10px">
+        <div class="tx"><span class="coin" style="background:#2775ca">$</span><div class="tx-txt"><b>USDC deposit</b><small>On-chain · Completed</small></div><span class="g">+12,500.00 USDC</span></div>
+        <div class="tx"><span class="coin" style="background:#0053e9">⇄</span><div class="tx-txt"><b>Swap NGN → USD</b><small>Rate shown before you swapped</small></div><span>+$1,962.00</span></div>
+        <div class="tx">{{flag:US}}<div class="tx-txt"><b>Payout to Harbor &amp; Pine LLC</b><small>Chase Bank · Delivered</small></div><span>−$18,400.00</span></div>
+        <div class="tx"><span class="coin" style="background:#1ac48e">₮</span><div class="tx-txt"><b>USDT deposit</b><small>On-chain · Completed</small></div><span class="g">+8,000.00 USDT</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container faq-cols">
+    <div class="faq-intro" data-reveal>
+      <p class="eyebrow" style="margin-bottom:0">FAQ</p>
+      <h2 class="h2" data-split>Questions,<br>answered.</h2>
+      <p class="lede">Still stuck? Our team can walk you through it.</p>
+      <a class="link" href="support.html">Visit the support center {{icon:arrow}}</a>
+    </div>
+    <div class="faq" data-reveal style="--d:.1s">
+      <div class="faq-item is-open"><button class="faq-q" aria-expanded="true">Which currencies can I hold?<span class="faq-tog">{{icon:plus}}</span></button><div class="faq-a"><div><p>NGN, USD, GBP and EUR, alongside the stablecoins USDC and USDT, all in one Brails account.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How do I fund a wallet?<span class="faq-tog">{{icon:plus}}</span></button><div class="faq-a"><div><p>Top up by bank transfer into your dedicated virtual account, deposit USDC or USDT to your wallet’s deposit address, or receive an internal transfer from another Brails business.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can I convert between currencies?<span class="faq-tog">{{icon:plus}}</span></button><div class="faq-a"><div><p>Yes. Swap between your balances at live rates in a few clicks. The rate is shown before you confirm.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Do stablecoins work like my other balances?<span class="faq-tog">{{icon:plus}}</span></button><div class="faq-a"><div><p>Yes. USDC and USDT sit in the same wallet view as your fiat, with the same transaction history and the same export.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Who on my team can see and use wallets?<span class="faq-tog">{{icon:plus}}</span></button><div class="faq-a"><div><p>Access follows your team roles. Owners and admins decide who can view balances and who can move money, and every action is recorded in the activity log.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!--@explore exclude="wallets"-->
+<!--@cta-->
+<!--@footer-->
