@@ -515,3 +515,11 @@
 @media (max-width: 1360px) and (min-width: 1241px) { .cbhero .phero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; } .cb-photo { left: 24%; } }
 @media (max-width: 1240px) { .cbhero .phero-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 760px) { .cb-widget { width: auto; max-width: none; } }
+/* cross-border spacing: 64px under the hero, 64px above Destinations */
+.cbhero { padding-bottom: 64px; }
+.cb-dest { padding-top: 64px; }
+/* pricing breakdown: a divider between every row (Figma), kept clear of the highlight outlines */
+.rv-break { padding: 6px 14px; display: grid; }
+.rv-row { border-bottom: 0; margin: 6px 0; padding: 9px 8px; }
+.rv-row:not(:last-child)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6.5px; height: 1px; background: var(--grey-200); }
+.rv-tag { font-size: 11.5px; padding: 3px 10px; }
