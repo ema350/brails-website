@@ -232,22 +232,34 @@
     });
   }
 
-  /* ---------- Support search ---------- */
-  const sform = $('[data-search]');
-  if (sform) {
-    const input = $('input', sform);
-    const arts = $$('.art');
-    const empty = $('[data-empty]');
+  /* ---------- Support search (across every collection) ---------- */
+  $$('[data-search]').forEach((form) => {
+    const idx = form.nextElementSibling?.matches('[data-index]') ? JSON.parse(form.nextElementSibling.textContent) : JSON.parse($('[data-index]')?.textContent || '[]');
+    const input = $('input', form), box = $('[data-results]', form);
+    let hits = [];
     const run = () => {
       const q = input.value.trim().toLowerCase();
-      let n = 0;
-      arts.forEach((a) => { const hit = !q || a.textContent.toLowerCase().includes(q); a.classList.toggle('is-hidden', !hit); n += hit; });
-      if (empty) empty.hidden = n > 0;
+      if (!q) { box.hidden = true; return; }
+      const words = q.split(/\s+/);
+      hits = idx.filter((r) => words.every((w) => (r.q + ' ' + r.c).toLowerCase().includes(w))).slice(0, 6);
+      box.innerHTML = hits.length ? hits.map((r) => `<a href="${r.h}"><b>${r.q}</b><small>${r.c}</small></a>`).join('') : `<p>No answers match that yet. <a href="mailto:hello@onbrails.com">Email our team</a></p>`;
+      box.hidden = false;
     };
-    sform.addEventListener('submit', (e) => { e.preventDefault(); run(); $('#popular')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
     input.addEventListener('input', run);
-    $$('[data-topic]').forEach((t) => t.addEventListener('click', (e) => { e.preventDefault(); input.value = t.dataset.topic; run(); $('#popular')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }));
-  }
+    input.addEventListener('focus', run);
+    document.addEventListener('click', (e) => { if (!form.contains(e.target)) box.hidden = true; });
+    form.addEventListener('submit', (e) => { e.preventDefault(); run(); if (hits[0]) location.href = hits[0].h; });
+    const q0 = new URLSearchParams(location.search).get('q');
+    if (q0 && !form.getAttribute('action')) { input.value = q0; run(); }
+  });
+
+  /* ---------- Support collection accordion ---------- */
+  $$('.acc-item').forEach((item) => {
+    const q = $('.acc-q', item);
+    q.addEventListener('click', () => { const open = !item.classList.contains('is-open'); item.classList.toggle('is-open', open); q.setAttribute('aria-expanded', String(open)); });
+  });
+  const openHash = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t?.classList.contains('acc-item')) { t.classList.add('is-open'); $('.acc-q', t).setAttribute('aria-expanded', 'true'); setTimeout(() => t.scrollIntoView({ block: 'center' }), 50); } };
+  openHash(); window.addEventListener('hashchange', openHash);
 
   /* ---------- Newsletter ---------- */
   $$('[data-newsletter]').forEach((f) => f.addEventListener('submit', (e) => {
@@ -345,5 +357,50 @@
       running = false;
     };
     onView(wt, (vis) => { visible = vis; if (vis) run(); }, { track: true, threshold: 0.35 });
+  });
+
+  /* ---------- Footer: letters lift as the blue bar passes behind them ---------- */
+  $$('[data-wave]').forEach((wm) => {
+    const bar = $('.footer-rule span', wm.parentElement), letters = $$('span', wm);
+    if (!bar || reduce) return;
+    let raf = 0;
+    const tick = () => {
+      const b = bar.getBoundingClientRect();
+      letters.forEach((l) => { const r = l.getBoundingClientRect(); const ink = r.left + r.width * 0.12; l.classList.toggle('is-up', b.right >= ink && b.left <= r.right - r.width * 0.1); });
+      raf = requestAnimationFrame(tick);
+    };
+    onView(wm, (vis) => { if (vis && !raf) raf = requestAnimationFrame(tick); else if (!vis && raf) { cancelAnimationFrame(raf); raf = 0; } }, { track: true, threshold: 0 });
+  });
+
+  /* ---------- Ticker: constant, calm speed (~128px/s) whatever the width ---------- */
+  $$('.ticker-track').forEach((t) => {
+    const set = () => { const w = t.firstElementChild?.offsetWidth || 0; if (w) t.style.animationDuration = `${(w / 128).toFixed(1)}s`; };
+    set(); window.addEventListener('resize', set);
+  });
+
+  /* ---------- SMEs: mini forms appear one after another and type their values ---------- */
+  $$('[data-forms]').forEach((list) => {
+    const minis = $$('.mini', list);
+    const vals = minis.map((m) => $$('b', m).map((b) => [b, b.textContent]));
+    if (reduce) { minis.forEach((m) => m.classList.add('is-in')); return; }
+    let running = false, visible = false;
+    const typeText = async (b, t, dur) => { b.textContent = ''; const step = Math.max(14, dur / t.length); for (let i = 1; i <= t.length; i++) { b.textContent = t.slice(0, i); await wait(step); } };
+    const run = async () => {
+      if (running) return; running = true;
+      do {
+        minis.forEach((m) => m.classList.remove('is-in')); vals.flat().forEach(([b]) => (b.textContent = ''));
+        const t0 = performance.now();
+        await wait(400);
+        for (let i = 0; i < minis.length; i++) {
+          minis[i].classList.add('is-in');
+          await wait(250);
+          for (const [b, t] of vals[i]) await typeText(b, t, 420);
+          await wait(Math.max(0, 400 + 2000 * (i + 1) - (performance.now() - t0)));
+        }
+        await wait(Math.max(1200, 10000 - (performance.now() - t0)));
+      } while (visible);
+      running = false;
+    };
+    onView(list, (vis) => { visible = vis; if (vis) run(); }, { track: true, threshold: 0.3 });
   });
 })();

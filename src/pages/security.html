@@ -1,41 +1,48 @@
-<!--@head title="Security — Brails" desc="Brails uses enterprise-grade security practices to keep your data safe and secure."-->
+<!--@head title="Security — Brails" desc="Brails uses enterprise-grade security practices to keep your money and data safe, from sign-up to every payment you send."-->
 <!--@nav active=""-->
 
-<section class="container sechero">
-  <h1 data-split>Security</h1>
-  <p data-reveal style="--d:.15s">Brails uses enterprise-grade security practices to keep your data safe and secure.</p>
-  <div class="lockart" data-reveal style="--d:.25s" aria-hidden="true">
-    <div class="dome"></div>
-    <img class="padlock" src="assets/img/padlock.png" alt="">
-    {{icon:spark}}{{icon:spark}}{{icon:spark}}{{icon:spark}}
-    <span class="ground" style="left:4%;right:4%;top:410px"></span>
-    <span class="ground" style="left:23%;right:23%;top:428px"></span>
+<section class="sxhero">
+  <div class="container sxhero-grid">
+    <div class="sxhero-copy">
+      <p class="eyebrow on-dark" data-reveal>Security</p>
+      <h1 data-split>Your money and data,<br><span class="hl">kept secure.</span></h1>
+      <p class="lede" data-reveal style="--d:.2s">Brails uses enterprise-grade security practices to keep your data safe and secure, from the first sign-up to every payment you send.</p>
+      <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Create account</a><a class="btn btn-ghost-dark" href="{{EMAIL}}">Contact us</a></div>
+      <ul class="sx-trust" data-reveal style="--d:.4s"><li>{{icon:check}} AES-256 at rest</li><li>{{icon:check}} TLS 1.2+ in transit</li><li>{{icon:check}} Hosted on AWS</li><li>{{icon:check}} Regular pen testing</li></ul>
+    </div>
+    <div class="sx-visual" data-reveal style="--d:.2s" aria-hidden="true">
+      <div class="sx-card"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="sx-glow"></i><img src="assets/img/padlock-3d.webp" alt=""></div>
+      <div class="sx-chip c1"><span class="fic tone-info">{{icon:lock}}</span><span><b>Encrypted end to end</b><small>AES-256 · TLS 1.2+</small></span></div>
+      <div class="sx-chip c2"><span class="fic tone-success">{{icon:shieldCheck}}</span><span><b>PCI DSS certified</b><small>Payment card industry</small></span></div>
+      <div class="sx-chip c3"><span class="fic tone-purple">{{icon:key}}</span><span><b>2FA on every login</b><small>Authenticator app</small></span></div>
+    </div>
   </div>
 </section>
 
-<section class="section pt-0">
-  <div class="container">
-    <div class="commit" data-reveal>
-      <div><h2>Security commitment</h2><p>Brails is committed to our customers’ security and keeping their data safe. As a cloud based company entrusted with some of our customers’ most important data, we built a culture of data protection and security from our very first days. We periodically undergo penetration testing, GDPR compliance reviews, and utilize encryption in the full data lifecycle.</p></div>
-      <div><h2>Safe and reliable infrastructure</h2><p>Brails uses Amazon Web Services for secure and available hosting for our software environments. Our AWS data centers are the backbone of the internet and is fully certified across all the major global compliance and security frameworks.</p></div>
+<section class="section sx-commit">
+  <div class="container sx-commit-grid">
+    <div data-reveal><p class="eyebrow">Our commitment</p><h2 class="h2" data-split>Security built in<br>from our first day.</h2></div>
+    <div class="sx-rows" data-stagger>
+      <div class="sx-row"><span class="fic">{{icon:shieldCheck}}</span><div><h3>Security commitment</h3><p>Brails is committed to our customers’ security and keeping their data safe. As a cloud based company entrusted with some of our customers’ most important data, we built a culture of data protection and security from our very first days. We periodically undergo penetration testing, GDPR compliance reviews, and utilize encryption in the full data lifecycle.</p></div></div>
+      <div class="sx-row"><span class="fic">{{icon:server}}</span><div><h3>Safe and reliable infrastructure</h3><p>Brails uses Amazon Web Services for secure and available hosting for our software environments. Our AWS data centers are the backbone of the internet and are fully certified across all the major global compliance and security frameworks.</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="section pt-0">
   <div class="container">
-    <div class="sec-head center" data-reveal><p class="eyebrow">How we protect you</p><h2 class="h2">Enterprise grade security</h2></div>
-    <div class="pillars" data-stagger>
-      <div class="pillar"><img src="assets/img/shield.jpg" alt="" loading="lazy"><h3>Encryption</h3><p>Encryption is at the core of our product. Data in-transit is encrypted using TLS 1.2+ and at-rest using the industry standard AES-256 algorithm.</p></div>
-      <div class="pillar"><img src="assets/img/ip-verified.jpg" alt="" loading="lazy"><h3>Incident response</h3><p>Our incident response team addresses every event which can cause disruptions to our service, including defined escalation paths and remediation.</p></div>
-      <div class="pillar"><img src="assets/img/team-3d.jpg" alt="" loading="lazy"><h3>Access and permissions</h3><p>All of your content comes with permission rights and authentication requirements, enabling you to share your content safely.</p></div>
-      <div class="pillar"><img src="assets/img/developer-box.jpg" alt="" loading="lazy"><h3>SDLC security</h3><p>Brails uses human review processes to ensure our Software Development Lifecycle Security, enabling consistent quality in our secure offering.</p></div>
-      <div class="pillar"><img src="assets/img/handshake.jpg" alt="" loading="lazy"><h3>Corporate security</h3><p>Brails requires TLS for all internal network communication and utilizes a central identity provider with two factor authentication as a requirement. Brails personnel undergo yearly security and privacy awareness training that is deeply rooted in our culture.</p></div>
-      <div class="pillar"><img src="assets/img/check-3d.jpg" alt="" loading="lazy"><h3>Vulnerability management</h3><p>Brails uses an automated and manual periodic review of production and staging environments, applications and networks of professionals for potential vulnerabilities that could affect our systems.</p></div>
+    <div class="sec-head center" data-reveal><p class="eyebrow">How we protect you</p><h2 class="h2">Enterprise-grade security, at every layer.</h2></div>
+    <div class="bento" data-stagger>
+      <div class="bcard bcard-dark bspan2"><img src="assets/img/sec-encryption.webp" alt="" loading="lazy" class="big"><h3>Encryption</h3><p>Encryption is at the core of our product. Data in-transit is encrypted using TLS 1.2+ and at-rest using the industry standard AES-256 algorithm.</p><ul class="bspecs"><li>TLS 1.2+ in transit</li><li>AES-256 at rest</li><li>Full data lifecycle</li></ul></div>
+      <div class="bcard"><img src="assets/img/sec-incident.webp" alt="" loading="lazy"><h3>Incident response</h3><p>Our incident response team addresses every event which can cause disruptions to our service, including defined escalation paths and remediation.</p></div>
+      <div class="bcard"><img src="assets/img/sec-access.webp" alt="" loading="lazy"><h3>Access and permissions</h3><p>All of your content comes with permission rights and authentication requirements, enabling you to share your content safely.</p></div>
+      <div class="bcard"><img src="assets/img/sec-sdlc.webp" alt="" loading="lazy"><h3>SDLC security</h3><p>Brails uses human review processes to ensure our Software Development Lifecycle Security, enabling consistent quality in our secure offering.</p></div>
+      <div class="bcard"><img src="assets/img/sec-corporate.webp" alt="" loading="lazy"><h3>Corporate security</h3><p>Brails requires TLS for all internal network communication and utilizes a central identity provider with two factor authentication as a requirement. Brails personnel undergo yearly security and privacy awareness training that is deeply rooted in our culture.</p></div>
+      <div class="bcard bcard-light bspan3"><img src="assets/img/sec-vulnerability.webp" alt="" loading="lazy"><div><h3>Vulnerability management</h3><p>Brails uses an automated and manual periodic review of production and staging environments, applications and networks of professionals for potential vulnerabilities that could affect our systems.</p></div></div>
     </div>
   </div>
 </section>
 
 <!--@licences-->
-<!--@setsail-->
+<!--@cta-->
 <!--@footer-->

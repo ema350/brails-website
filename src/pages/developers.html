@@ -1,128 +1,122 @@
 <!--@head title="Developers — Brails API" desc="One API for payouts, wallets and swaps, with webhooks for every event. Everything in the dashboard is available by API."-->
-<!--@nav active="developers"-->
+<!--@nav active="developers" theme="dark"-->
+<div class="dx">
+<section class="dxhero">
+  <div class="dx-grid-bg" aria-hidden="true"></div><div class="dx-glow" aria-hidden="true"></div>
+  <div class="container dxhero-in">
+    <span class="dx-status" data-reveal><i></i>BRAILS API <em>/</em> <b>REST + WEBHOOKS</b></span>
+    <h1 data-split>Build payments<br><span class="hl">into your product</span><i class="dx-cursor">_</i></h1>
+    <p class="lede" data-reveal style="--d:.2s">One API for payouts, wallets and swaps, with webhooks for every event. Everything in the dashboard is available by API.</p>
+    <div class="btn-row center" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{DOCS}}">Read API docs →</a><a class="btn dx-term-btn" href="{{APP}}"><b>$</b> get API keys</a></div>
+    <div class="dx-term" data-reveal style="--d:.35s">
+      <div class="code-win dx-win" data-type>
+        <div class="code-bar"><i></i><i></i><i></i><div class="code-tabs" role="tablist" aria-label="Code language"><button data-lang="node" class="is-on" role="tab">payout.js</button><button data-lang="python" role="tab">payout.py</button><button data-lang="curl" role="tab">curl</button></div><span class="code-meta"><b class="dx-post">POST</b> /payouts</span></div>
+        <div class="dx-panes">
+          <div>
+            <template data-src="node"><span class="k">import</span> { Brails } <span class="k">from</span> <span class="s">"brails"</span>;
 
-<section class="dhero">
-  <div class="glow" aria-hidden="true"></div>
-  <div class="container dhero-grid">
-    <div class="copy-stack" style="gap:28px">
-      <span class="pill-dark" data-reveal>{{icon:code}} Brails API</span>
-      <h1 data-split>Build payments into your product.</h1>
-      <p class="lede" data-reveal style="--d:.2s">One API for payouts, wallets and swaps, with webhooks for every event. Everything in the dashboard is available by API.</p>
-      <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{DOCS}}">Read API docs</a></div>
-      <ul class="feats" data-reveal style="--d:.4s">
-        <li>{{icon:checkCircle}} REST API</li>
-        <li>{{icon:checkCircle}} Webhooks</li>
-        <li>{{icon:checkCircle}} Customer API access</li>
-      </ul>
-    </div>
-    <div class="code-wrap" data-reveal style="--d:.2s">
-      <div class="code-win" data-type>
-        <div class="code-bar"><i></i><i></i><i></i><div class="code-tabs" role="tablist" aria-label="Code language"><button data-lang="curl" role="tab">curl</button><button data-lang="node" class="is-on" role="tab">Node</button><button data-lang="python" role="tab">Python</button></div><span class="code-meta">POST /payouts</span></div>
-        <template data-src="node"><span class="k">const</span> payout = <span class="k">await</span> brails.payouts.<span class="p">create</span>({
+<span class="k">const</span> brails = <span class="k">new</span> Brails(process.env.BRAILS_SECRET_KEY);
+
+<span class="k">const</span> payout = <span class="k">await</span> brails.payouts.<span class="p">create</span>({
   source_wallet: <span class="s">"NGN"</span>,
   amount: <span class="n">18400.00</span>,
   currency: <span class="s">"USD"</span>,
   beneficiary: <span class="s">"ben_harbor_pine"</span>,
-});
+});</template>
+            <template data-src="python"><span class="k">from</span> brails <span class="k">import</span> Brails
 
-<span class="c">// ← 201 { id: "po_…", status: "processing" }</span></template>
-        <template data-src="curl">curl -X POST <span class="s">"$BRAILS_API/payouts"</span> \
-  -H <span class="s">"Authorization: Bearer $BRAILS_KEY"</span> \
-  -d source_wallet=<span class="s">NGN</span> \
-  -d amount=<span class="n">18400.00</span> \
-  -d currency=<span class="s">USD</span> \
-  -d beneficiary=<span class="s">ben_harbor_pine</span>
+brails = Brails(os.environ[<span class="s">"BRAILS_SECRET_KEY"</span>])
 
-<span class="c"># ← 201 { "status": "processing" }</span></template>
-        <template data-src="python">payout = brails.payouts.<span class="p">create</span>(
+payout = brails.payouts.<span class="p">create</span>(
     source_wallet=<span class="s">"NGN"</span>,
     amount=<span class="n">18400.00</span>,
     currency=<span class="s">"USD"</span>,
     beneficiary=<span class="s">"ben_harbor_pine"</span>,
-)
-
-<span class="c"># ← 201 { "status": "processing" }</span></template>
-        <pre class="code-body" style="padding-bottom:64px"></pre>
-      </div>
-      <div class="webhook-toast"><i class="dot"></i>payout.completed <em>Delivered</em></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <div><p class="eyebrow">The API</p><h2 class="h2">Five building blocks.</h2></div>
-      <p class="lede">The same objects you see in the dashboard, available as endpoints.</p>
-    </div>
-    <div class="blocks" data-stagger>
-      <div class="fcard"><div class="fcard-top"><span class="fic">{{icon:send}}</span><span class="endpoint">/payouts</span></div><h3>Payouts</h3><p>Create payouts to beneficiaries in ten destinations and follow each one to delivery.</p></div>
-      <div class="fcard"><div class="fcard-top"><span class="fic">{{icon:swap}}</span><span class="endpoint">/swaps</span></div><h3>Wallets and swaps</h3><p>Read balances across six currencies, convert between them and move funds between wallets.</p></div>
-      <div class="fcard"><div class="fcard-top"><span class="fic">{{icon:users}}</span><span class="endpoint">/beneficiaries</span></div><h3>Beneficiaries</h3><p>Save a recipient’s bank details once, then pay them by ID in any of ten destinations.</p></div>
-      <div class="fcard wide"><div class="fcard-top"><span class="fic">{{icon:person}}</span><span class="endpoint">/customers</span></div><h3>Customers</h3><p>Create customer profiles so your platform can send payouts on their behalf.</p></div>
-      <div class="fcard wide"><div class="fcard-top"><span class="fic">{{icon:bell}}</span><span class="endpoint">/webhooks</span></div><h3>Webhooks</h3><p>Subscribe to events instead of polling, from wallet funding to delivered payouts.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-grey">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <div><p class="eyebrow">Get started</p><h2 class="h2">From key to first payout.</h2></div>
-      <p class="lede">Three steps, and you are sending.</p>
-    </div>
-    <div class="cards3" data-stagger>
-      <div class="kstep"><span>01</span><h3>Create your API keys</h3><p>Generate and manage keys from the dashboard once your business is verified.</p><div class="snippet">API key&nbsp; •••• •••• 3f9a</div></div>
-      <div class="kstep"><span>02</span><h3>Whitelist your IPs</h3><p>Restrict each key to the servers that should be calling it.</p><div class="snippet">203.0.113.24/32&nbsp; ✓ allowed</div></div>
-      <div class="kstep"><span>03</span><h3>Send a request</h3><p>Create a payout, then listen for the webhook that confirms it.</p><div class="snippet">POST /payouts&nbsp; → 201</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-navy">
-  <div class="container cols">
-    <div class="copy-stack on-dark" data-reveal>
-      <p class="eyebrow on-dark" style="margin-bottom:0">Webhooks</p>
-      <h2 class="h2">Hear about it the moment it happens.</h2>
-      <p class="lede" style="font-size:18px;max-width:none">Webhooks push every state change to your server, so your product always knows where a payment or a swap stands.</p>
-      <a class="link on-dark" href="{{DOCS}}">Browse all events {{icon:arrow}}</a>
-    </div>
-    <div class="code-win" data-reveal style="--d:.15s">
-      <div class="feed" data-feed style="border-top:0;background:none;padding:20px">
-        <div class="feed-h"><span>Events</span><span class="listen"><i class="dot"></i>Listening</span></div>
-        <div class="evt"><b><i class="dot g"></i>wallet.funded</b><small>NGN wallet credited</small></div>
-        <div class="evt"><b><i class="dot g"></i>swap.completed</b><small>NGN to USD</small></div>
-        <div class="evt"><b><i class="dot y"></i>payout.processing</b><small>In flight</small></div>
-        <div class="evt"><b><i class="dot b"></i>payout.completed</b><small>Delivered</small></div>
-        <div class="evt"><b><i class="dot g"></i>virtual_account.credited</b><small>Incoming transfer</small></div>
+)</template>
+            <template data-src="curl">curl -X POST <span class="s">"$BRAILS_API/payouts"</span> \
+  -H <span class="s">"Authorization: Bearer $BRAILS_SECRET_KEY"</span> \
+  -d source_wallet=<span class="s">NGN</span> \
+  -d amount=<span class="n">18400.00</span> \
+  -d currency=<span class="s">USD</span> \
+  -d beneficiary=<span class="s">ben_harbor_pine</span></template>
+            <pre class="code-body"></pre>
+          </div>
+          <div class="dx-resp">
+            <p class="dx-lbl">Response <b class="dx-201">201 Created</b> <small>142ms</small></p>
+<pre class="dx-json">{
+  <span class="p">"id"</span>: <span class="s">"po_…"</span>,
+  <span class="p">"status"</span>: <span class="s">"processing"</span>,
+  <span class="p">"amount"</span>: <span class="n">18400.00</span>,
+  <span class="p">"currency"</span>: <span class="s">"USD"</span>
+}</pre>
+            <div class="feed dx-feed" data-feed><div class="feed-h"><span>Webhook</span><span class="listen"><i class="dot"></i>Listening</span></div>
+              <div class="evt"><b><i class="dot y"></i>payout.processing</b><small>In flight</small></div>
+              <div class="evt"><b><i class="dot g"></i>payout.completed</b><small>Delivered</small></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="dx-stats"><div class="container"><div class="dx-stats-row" data-stagger>
+  <div><strong>06</strong><span>currencies in one balance</span></div>
+  <div><strong>10</strong><span>payout destinations</span></div>
+  <div><strong>05</strong><span>core API objects</span></div>
+  <div><strong>01</strong><span>webhook for every event</span></div>
+</div></div></section>
+
+<section class="dx-sec">
   <div class="container">
-    <div class="sec-head" data-reveal>
-      <div><p class="eyebrow">Security</p><h2 class="h2">Secure by default.</h2></div>
-      <p class="lede">Controls for the people who run the integration.</p>
-    </div>
-    <div class="cards4" data-stagger>
-      <div class="fcard"><span class="fic solid">{{icon:key}}</span><h3>API key management</h3><p>Create, rotate and revoke keys from the dashboard.</p></div>
-      <div class="fcard"><span class="fic solid">{{icon:server}}</span><h3>IP whitelisting</h3><p>Only your servers can use your keys.</p></div>
-      <div class="fcard"><span class="fic solid">{{icon:lock}}</span><h3>2FA and passkeys</h3><p>Protect the dashboard that holds the keys.</p></div>
-      <div class="fcard"><span class="fic solid">{{icon:list}}</span><h3>Activity log</h3><p>Every action in the dashboard is recorded, with who did it and when.</p></div>
+    <div class="dx-head" data-reveal><div><p class="dx-eb"><b>// 01</b> THE API</p><h2>Five building blocks.</h2></div><p>The same objects you see in the dashboard, available as endpoints.</p></div>
+    <div class="dx-table" data-reveal>
+      <div class="dx-tr dx-th"><span>Object</span><span>Endpoint</span><span>What it does</span><span></span></div>
+      <div class="dx-tr"><span class="dx-obj"><i style="--c:#5b85ff">{{icon:arrow}}</i>Payouts</span><code>/payouts</code><p>Create payouts to beneficiaries in ten destinations and follow each one to delivery.</p><em>→</em></div>
+      <div class="dx-tr"><span class="dx-obj"><i style="--c:#a959ff">{{icon:swap}}</i>Wallets and swaps</span><code>/swaps</code><p>Read balances across six currencies, convert between them and move funds between wallets.</p><em>→</em></div>
+      <div class="dx-tr"><span class="dx-obj"><i style="--c:#fea400">{{icon:users}}</i>Beneficiaries</span><code>/beneficiaries</code><p>Save a recipient’s bank details once, then pay them by ID in any of ten destinations.</p><em>→</em></div>
+      <div class="dx-tr"><span class="dx-obj"><i style="--c:#75e8f1">{{icon:briefcase}}</i>Customers</span><code>/customers</code><p>Create customer profiles so your platform can send payouts on their behalf.</p><em>→</em></div>
+      <div class="dx-tr"><span class="dx-obj"><i style="--c:#1ac48e">{{icon:bell}}</i>Webhooks</span><code>/webhooks</code><p>Subscribe to events instead of polling, from wallet funding to delivered payouts.</p><em>→</em></div>
     </div>
   </div>
 </section>
 
-<section class="section pt-0">
+<section class="dx-sec">
   <div class="container">
-    <div class="band dark" data-reveal>
-      <div class="glow" style="width:600px;height:600px;left:55%;top:-260px;background:rgba(0,54,187,.55)" aria-hidden="true"></div>
-      <div style="position:relative"><h2>Start building today.</h2><p>Create an account, verify your business and generate your first API key.</p></div>
-      <div class="btn-row"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-secondary" href="{{DOCS}}">Read API docs</a></div>
+    <div class="dx-head" data-reveal><div><p class="dx-eb"><b>// 02</b> GET STARTED</p><h2>From key to first payout.</h2></div><p>Three steps, and you are sending.</p></div>
+    <div class="dx-steps" data-stagger>
+      <div class="dx-step"><div class="dx-step-top"><span>STEP 01</span><i><b style="width:33%"></b></i></div><h3>Create your API keys</h3><p>Generate and manage keys from the dashboard once your business is verified.</p><code><b>&gt;</b> API key  •••• •••• 3f9a</code></div>
+      <div class="dx-step"><div class="dx-step-top"><span>STEP 02</span><i><b style="width:66%"></b></i></div><h3>Whitelist your IPs</h3><p>Restrict each key to the servers that should be calling it.</p><code class="g"><b>&gt;</b> 203.0.113.24/32  ✓ allowed</code></div>
+      <div class="dx-step"><div class="dx-step-top"><span>STEP 03</span><i><b style="width:100%"></b></i></div><h3>Send a request</h3><p>Create a payout, then listen for the webhook that confirms it.</p><code class="b"><b>&gt;</b> POST /payouts  → 201</code></div>
     </div>
   </div>
 </section>
 
+<section class="dx-sec">
+  <div class="container dx-wh">
+    <div data-reveal><p class="dx-eb"><b>// 03</b> WEBHOOKS</p><h2>Hear about it the<br>moment it happens.</h2><p class="dx-p">Webhooks push every state change to your server, so your product always knows where a payment or a swap stands.</p><a class="dx-link" href="{{DOCS}}">Browse all events →</a></div>
+    <div class="dx-log" data-feed data-reveal>
+      <div class="dx-log-h"><span>POST https://your-app.com/webhooks/brails</span><span class="listen"><i class="dot"></i>listening</span></div>
+      <div class="evt"><time>14:02:11.204</time><b><i class="dot" style="color:#5bc8f5"></i>wallet.funded</b><small>NGN wallet credited</small><em>200</em></div>
+      <div class="evt"><time>14:02:48.917</time><b><i class="dot" style="color:#a959ff"></i>swap.completed</b><small>NGN to USD</small><em>200</em></div>
+      <div class="evt"><time>14:03:02.355</time><b><i class="dot y"></i>payout.processing</b><small>In flight</small><em>200</em></div>
+      <div class="evt"><time>14:07:19.640</time><b><i class="dot g"></i>payout.completed</b><small>Delivered</small><em>200</em></div>
+      <div class="evt"><time>14:09:33.012</time><b><i class="dot" style="color:#5bc8f5"></i>virtual_account.credited</b><small>Incoming transfer</small><em>200</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="dx-sec dx-last">
+  <div class="container">
+    <div class="dx-head" data-reveal><div><p class="dx-eb"><b>// 04</b> SECURITY</p><h2>Secure by default.</h2></div><p>Controls for the people who run the integration.</p></div>
+    <div class="dx-ctrls" data-stagger>
+      <div class="dx-ctrl"><div><i>{{icon:key}}</i><code>key.rotate()</code></div><h3>API key management</h3><p>Create, rotate and revoke keys from the dashboard.</p></div>
+      <div class="dx-ctrl"><div><i>{{icon:server}}</i><code>ip.allow()</code></div><h3>IP whitelisting</h3><p>Only your servers can use your keys.</p></div>
+      <div class="dx-ctrl"><div><i>{{icon:lock}}</i><code>auth.verify()</code></div><h3>2FA and passkeys</h3><p>Protect the dashboard that holds the keys.</p></div>
+      <div class="dx-ctrl"><div><i>{{icon:list}}</i><code>log.list()</code></div><h3>Activity log</h3><p>Every action in the dashboard is recorded, with who did it and when.</p></div>
+    </div>
+  </div>
+</section>
+<!--@cta-->
+</div>
 <!--@footer-->

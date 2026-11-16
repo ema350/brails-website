@@ -1,19 +1,15 @@
 <!--@head title="Multi-currency wallets — Brails" desc="Hold USD, EUR, GBP and NGN next to USDC and USDT in one Brails account, and convert when the rate suits you."-->
 <!--@nav active="products"-->
 
-<section class="phero phero-blue">
-  <div class="container phero-grid">
-    <div class="phero-copy">
-      <div class="crumbs" data-reveal><span>Products</span><i>/</i><span class="pill">{{icon:wallet}} Multi-currency wallets</span></div>
-      <h1 class="display-l" data-split>Multiple wallets.<br>One business.</h1>
+<section class="phero phero-blue phero-center">
+  <div class="container">
+    <div class="phero-copy center">
+      <div class="crumbs center" data-reveal><span>Products</span><i>/</i><span class="pill">{{icon:wallet}} Multi-currency wallets</span></div>
+      <h1 class="display-l" data-split>Multiple wallets, one business.</h1>
       <p class="lede" data-reveal style="--d:.2s">Hold USD, EUR, GBP and NGN next to USDC and USDT. Convert when the rate suits you, not when a payment forces your hand.</p>
-      <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
-      <div class="stats" data-stagger>
-        <div class="stat"><strong data-count="6">6</strong><span>currencies, one account</span></div>
-        <div class="stat"><strong data-count="2">2</strong><span>stablecoins next to fiat</span></div>
-        <div class="stat"><strong>Live</strong><span>rates on every swap</span></div>
-      </div>
+      <div class="btn-row center" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
     </div>
+    <div class="device" data-reveal style="--d:.15s"><i class="device-lens"></i>
     <div class="wt" data-wt data-reveal style="--d:.15s" role="img" aria-label="Animated walkthrough of the Brails wallets screen switching between USD, NGN and KES balances">
       <div class="wt-bar"><i></i><i></i><i></i><span class="wt-url">app.onbrails.com/wallets</span></div>
       <div class="wt-view">
@@ -59,6 +55,7 @@
         {"code":"KES","bal":"KSh 2,480,000","rows":[["+350,000","dep","ok"],["-20,000","snd","fail"],["+120,000","swp","pend"],["-45,000","snd","ok"],["+260,000","swp","ok"],["-9,000","snd","ok"]]}
       ]</script>
     </div>
+    </div>
   </div>
 </section>
 
@@ -78,7 +75,7 @@
       <div class="hub" data-cycle=".ccys span" data-ms="1200">
         <small>YOUR BRAILS WALLET</small>
         <strong>One balance,<br>six currencies</strong>
-        <div class="ccys"><span class="is-on">NGN</span><span>USD</span><span>GBP</span><span>EUR</span><span>USDC</span><span>USDT</span></div>
+        <div class="ccys"><span class="is-on">{{flag:NG:xs}}NGN</span><span>{{flag:US:xs}}USD</span><span>{{flag:GB:xs}}GBP</span><span>{{flag:EU:xs}}EUR</span><span>{{token:USDC}}USDC</span><span>{{token:USDT}}USDT</span></div>
       </div>
       <div class="wires" aria-hidden="true"><div class="wire out"><i style="--dl:.4s"></i></div><div class="wire out"><i style="--dl:1.3s"></i></div><div class="wire out"><i style="--dl:2.2s"></i></div></div>
       <div class="flow-col">

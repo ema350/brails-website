@@ -1,25 +1,27 @@
 <!--@head title="Support — Brails" desc="Search guides and answers, or get in touch with the Brails team."-->
 <!--@nav active="company"-->
 
-<section class="shero">
+<section class="shero shero-photo">
   <div class="glow" aria-hidden="true"></div>
-  <div class="container">
-    <p class="eyebrow" data-reveal>Support</p>
-    <h1 data-split>How can we help?</h1>
-    <p class="lede" style="font-size:20px;max-width:none;--d:.15s" data-reveal>Search guides and answers, or get in touch with the Brails team.</p>
-    <form class="searchbar" data-search role="search" data-reveal style="--d:.25s">
-      {{icon:search}}
-      <label class="sr-only" for="q">Search support</label>
-      <input id="q" type="search" placeholder="Search for answers, e.g. “add a recipient”" autocomplete="off">
-      <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-    <div class="topics" data-reveal style="--d:.35s">
-      <span>Popular:</span>
-      <a href="#popular" data-topic="KYB">Business verification (KYB)</a>
-      <a href="#popular" data-topic="wallet">Fund a wallet</a>
-      <a href="#popular" data-topic="US">Send to a US bank</a>
-      <a href="#popular" data-topic="two-factor">2FA and passkeys</a>
-      <a href="#popular" data-topic="API">API keys</a>
+  <div class="container shero-grid">
+    <div class="shero-copy">
+      <p class="eyebrow" data-reveal>Support</p>
+      <h1 data-split>How can we<br>help today?</h1>
+      <p class="lede" data-reveal style="--d:.15s">Browse our frequently asked questions and other self-help resources to find the answers you need.</p>
+      <div data-reveal style="--d:.25s"><!--@searchbar--></div>
+      <div class="topics" data-reveal style="--d:.35s">
+        <span>Popular:</span>
+        <a href="support-verification.html">Business verification (KYB)</a>
+        <a href="support-wallet.html#q6">Fund a wallet</a>
+        <a href="support-transactions.html#q4">Where can I send?</a>
+        <a href="support-settings.html#q3">2FA and PIN</a>
+        <a href="support-developers.html">API keys</a>
+      </div>
+    </div>
+    <div class="shero-visual" data-reveal style="--d:.2s">
+      <div class="shero-photo-card"><img src="assets/img/support-agent.webp" alt="A Brails support specialist wearing a headset, smiling"></div>
+      <div class="schip schip-mail"><span class="fic">{{icon:mail}}</span><span><b>Email support</b><small>hello@onbrails.com</small></span></div>
+      <a class="schip schip-found" href="support-beneficiaries.html"><small>{{icon:search}} “add a recipient”</small><span class="schip-row"><span class="fic tone-yellow">{{icon:users}}</span><span><b>How to add beneficiaries</b><small>Beneficiaries · 2 articles</small></span>{{icon:arrow}}</span></a>
     </div>
   </div>
 </section>
@@ -30,48 +32,9 @@
       <div><p class="eyebrow">Browse by topic</p><h2 class="h2">Find answers by topic.</h2></div>
       <p class="lede">Guides for every part of Brails, from your first verification to your first API call.</p>
     </div>
-    <div class="help-grid" data-stagger>
-      <a class="help" href="#popular"><div class="help-top"><span class="fic">{{icon:pencil}}</span><span class="go">{{icon:arrow}}</span></div><h3>Getting started</h3><p>Create your account, complete business verification (KYB) and invite your team.</p></a>
-      <a class="help" href="#popular"><div class="help-top"><span class="fic">{{icon:wallet}}</span><span class="go">{{icon:arrow}}</span></div><h3>Wallets and funding</h3><p>Virtual accounts, stablecoin deposits, swaps and statements.</p></a>
-      <a class="help" href="#popular"><div class="help-top"><span class="fic">{{icon:send}}</span><span class="go">{{icon:arrow}}</span></div><h3>Sending payments</h3><p>Recipients, destinations, fees, delivery times and receipts.</p></a>
-      <a class="help" href="#popular"><div class="help-top"><span class="fic">{{icon:users}}</span><span class="go">{{icon:arrow}}</span></div><h3>Beneficiaries</h3><p>Add, save and manage recipients and their bank details for each destination.</p></a>
-      <a class="help" href="developers.html"><div class="help-top"><span class="fic">{{icon:code}}</span><span class="go">{{icon:arrow}}</span></div><h3>Developers and API</h3><p>API keys, IP whitelisting, webhooks and the API reference.</p></a>
-      <a class="help" href="security.html"><div class="help-top"><span class="fic">{{icon:lock}}</span><span class="go">{{icon:arrow}}</span></div><h3>Security and access</h3><p>Two-factor authentication, passkeys, your transaction PIN, roles and the activity log.</p></a>
-    </div>
+    <!--@helpcards-->
   </div>
 </section>
 
-<section class="section section-grey" id="popular">
-  <div class="container">
-    <div class="sec-head" data-reveal><div><p class="eyebrow">Popular articles</p><h2 class="h2">What most people ask first.</h2></div></div>
-    <div class="articles" data-stagger>
-      <div class="art-col">
-        <a class="art" href="cross-border-payments.html">{{icon:doc}}<span>How long does a payment take?</span>{{icon:arrow}}</a>
-        <a class="art" href="cross-border-payments.html">{{icon:doc}}<span>What details do I need for a US recipient?</span>{{icon:arrow}}</a>
-        <a class="art" href="blog.html">{{icon:doc}}<span>KYB explained: what we ask for and why</span>{{icon:arrow}}</a>
-      </div>
-      <div class="art-col">
-        <a class="art" href="multi-currency-wallets.html">{{icon:doc}}<span>Funding a wallet by bank transfer</span>{{icon:arrow}}</a>
-        <a class="art" href="security.html">{{icon:doc}}<span>Setting up two-factor authentication and passkeys</span>{{icon:arrow}}</a>
-        <a class="art" href="developers.html">{{icon:doc}}<span>Creating and rotating API keys</span>{{icon:arrow}}</a>
-      </div>
-    </div>
-    <p data-empty hidden style="margin-top:24px;font-size:16px">No articles match that search yet. Try another word, or <a class="link" href="{{EMAIL}}" style="font-size:16px">email our team {{icon:arrow}}</a></p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <div><p class="eyebrow">Get in touch</p><h2 class="h2">Still need a hand?</h2></div>
-      <p class="lede">Choose the route that suits you. Signed-in customers get the fastest answers from inside the dashboard.</p>
-    </div>
-    <div class="contact" data-stagger>
-      <div class="ccard blue"><span class="fic">{{icon:sparkles}}</span><h3>Ask Brailey</h3><p>Get answers inside your dashboard from Brailey, the Brails assistant.</p><a class="btn btn-outline" href="{{APP}}">Open dashboard</a></div>
-      <div class="ccard"><span class="fic">{{icon:mail}}</span><h3>Email support</h3><p>Write to us at hello@onbrails.com and our team will get back to you.</p><a class="btn btn-outline" href="{{EMAIL}}">Send an email</a></div>
-      <div class="ccard"><span class="fic">{{icon:phone}}</span><h3>Talk to sales</h3><p>For pricing, higher volumes or a walkthrough of Brails for your business.</p><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
-    </div>
-  </div>
-</section>
-
+<!--@contact-->
 <!--@footer-->

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@96,700&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/v2.css">
 <script>document.documentElement.classList.add('js')</script>
 <script src="assets/js/site.js" defer></script>
 </head>
@@ -64,15 +65,15 @@
 </header>
 <main id="main">
 
-<div class="container lhead">
+<div class="container"><div class="lhead lhead-card"><i class="lh-ring" aria-hidden="true"></i><i class="lh-glow" aria-hidden="true"></i>
   <div data-reveal>
     <p class="eyebrow">Legal</p>
     <h1>Terms of Service</h1>
     <p class="updated">Last updated: add date</p>
   </div>
-  <img src="assets/img/anchor.jpg" alt="" data-reveal style="--d:.15s">
-</div>
-<div class="container"><nav class="legal-tabs" aria-label="Legal pages"><a href="terms.html" aria-current="page" class="is-active">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a><a href="security.html">Security</a></nav></div>
+  <img src="assets/img/anchor-3d.webp" alt="" data-reveal style="--d:.15s">
+</div></div>
+<div class="container"><nav class="legal-tabs" aria-label="Legal pages"><a href="terms.html" aria-current="page" class="is-active">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a></nav></div>
 
 <div class="container lbody">
   <nav class="toc" data-toc aria-label="On this page">
@@ -137,13 +138,20 @@
   </article>
 </div>
 
-<section class="section setsail-wrap">
+<section class="section final-cta">
   <div class="container">
-    <div class="setsail" data-reveal>
-      <svg class="waves" viewBox="0 0 1600 420" preserveAspectRatio="none" aria-hidden="true"><path d="M-120 150 C 200 90, 500 210, 800 150 S 1400 90, 1720 150" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none"/><path d="M-120 190 C 200 130, 500 250, 800 190 S 1400 130, 1720 190" stroke="rgba(255,255,255,0.072)" stroke-width="2" fill="none"/><path d="M-120 230 C 200 170, 500 290, 800 230 S 1400 170, 1720 230" stroke="rgba(255,255,255,0.08399999999999999)" stroke-width="2" fill="none"/><path d="M-120 270 C 200 210, 500 330, 800 270 S 1400 210, 1720 270" stroke="rgba(255,255,255,0.096)" stroke-width="2" fill="none"/><path d="M-120 310 C 200 250, 500 370, 800 310 S 1400 250, 1720 310" stroke="rgba(255,255,255,0.108)" stroke-width="2" fill="none"/><path d="M-120 350 C 200 290, 500 410, 800 350 S 1400 290, 1720 350" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/></svg>
-      <h2>Set sail for global success with Brails.</h2>
-      <p>Create an account to unlock access to seamless payment services.</p>
-      <a class="btn btn-outline" href="https://app.onbrails.com">Create account</a>
+    <div class="cta-card" data-reveal>
+      <img src="assets/img/cta-podium.webp" alt="" class="cta-bg" loading="lazy">
+      <svg class="cta-route" viewBox="-8 -8 808 300" preserveAspectRatio="none" aria-hidden="true"><path id="ctaRoute" d="M 0 0 C 100 328 700 368 792 140" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"/><circle r="7" fill="#1ac48e" class="cta-dot"><animateMotion dur="4s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".6 0 .4 1"><mpath href="#ctaRoute"/></animateMotion></circle></svg>
+      <div class="cta-send" aria-hidden="true"><small>You send</small><div><strong>₦28,140,000.00</strong><span class="cur"><span class="flag xs"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M9.33 0H0V28H9.33V0Z" fill="#008751"/><path d="M18.67 0H9.33V28H18.67V0Z" fill="#fff"/><path d="M28 0H18.67V28H28V0Z" fill="#008751"/></svg></span>NGN</span></div></div>
+      <div class="cta-recv" aria-hidden="true"><div class="cta-payee"><span class="avatar">HP</span><span><b>Harbor &amp; Pine LLC</b><small>Chase Bank · United States</small></span></div><div class="cta-amt"><strong>$18,400.00</strong><span class="cta-done"><i class="dot"></i>Delivered</span></div></div>
+      <span class="cta-flag" style="left:19.05%;top:11.2%;--d:0s"><span class="flag"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M28 0H0V28H28V0Z" fill="#DE2910"/><path d="M8.4 4.67L9.8 8.87H14L10.55 11.39L11.85 15.59L8.4 13.07L4.95 15.59L6.25 11.39L2.8 8.87H7L8.4 4.67Z" fill="#FFDE00"/></svg></span></span><span class="cta-flag" style="left:79%;top:10.8%;--d:0.8s"><span class="flag"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M28 0H0V28H28V0Z" fill="#fff"/><path d="M28 0H0V8.4H28V0Z" fill="#000"/><path d="M28 10.27H0V17.73H28V10.27Z" fill="#B00"/><path d="M28 19.6H0V28H28V19.6Z" fill="#060"/><ellipse cx="14" cy="14" rx="3.36" ry="6.53" fill="#B00" stroke="#000"/></svg></span></span><span class="cta-flag" style="left:94.4%;top:43%;--d:1.6s"><span class="flag"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M28 0H0V28H28V0Z" fill="#000"/><path d="M28 4.67H0V9.33H28V4.67ZM28 18.67H0V23.33H28V18.67Z" fill="#FCDC04"/><path d="M28 9.33H0V14H28V9.33ZM28 23.33H0V28H28V23.33Z" fill="#D90000"/><circle cx="14" cy="14" r="5.13" fill="#fff"/><circle cx="14" cy="14" r="1.87" fill="#000"/></svg></span></span><span class="cta-flag" style="left:2.6%;top:56.2%;--d:2.4s"><span class="flag"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M28 0H0V28H28V0Z" fill="#fff"/><path d="M28 0H0V2.156H28V0ZM28 4.312H0V6.468H28V4.312ZM28 8.615H0V10.771H28V8.615ZM28 12.927H0V15.083H28V12.927ZM28 17.229H0V19.385H28V17.229ZM28 21.541H0V23.697H28V21.541ZM28 25.844H0V28H28V25.844Z" fill="#B22234"/><path d="M14 0H0V15.12H14V0Z" fill="#3C3B6E"/></svg></span></span><span class="cta-flag" style="left:91.3%;top:86.7%;--d:3.2s"><span class="flag"><svg viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M9.33 0H0V28H9.33V0Z" fill="#008751"/><path d="M18.67 0H9.33V28H18.67V0Z" fill="#fff"/><path d="M28 0H18.67V28H28V0Z" fill="#008751"/></svg></span></span>
+      <svg class="ic cta-spark" viewBox="0 0 56 56" fill="none" aria-hidden="true" focusable="false"><path d="M28 0L35.28 20.72L56 28L35.28 35.28L28 56L20.72 35.28L0 28L20.72 20.72L28 0Z" fill="currentColor"/></svg>
+      <div class="cta-copy">
+        <h2 class="display-l">Your next international<br>payment <span>starts here.</span></h2>
+        <p>Open a Brails account, complete business verification and fund your first wallet.</p>
+        <div class="btn-row center"><a class="btn btn-primary" href="https://app.onbrails.com">Create an account</a><a class="btn btn-secondary" href="mailto:hello@onbrails.com?subject=Talk%20to%20sales">Talk to sales</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -151,13 +159,13 @@
 <footer class="footer">
   <div class="footer-cols container">
     <div><h3>Products</h3><a href="cross-border-payments.html">Cross-border payments</a><a href="multi-currency-wallets.html">Multi-currency wallets</a><a href="smes.html">SMEs</a></div>
-    <div><h3>Company</h3><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="support.html">Support</a></div>
-    <div><h3>Legal</h3><a href="terms.html">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a><a href="security.html">Security</a></div>
+    <div><h3>Company</h3><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="support.html">Support</a><a href="security.html">Security</a></div>
+    <div><h3>Legal</h3><a href="terms.html">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a></div>
     <div><h3>Follow us</h3><a href="#">X</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="mailto:hello@onbrails.com">hello@onbrails.com</a></div>
   </div>
   <div class="footer-mark" aria-hidden="true">
     <div class="footer-rule"><span></span></div>
-    <div class="wordmark"><span style="--i:0">B</span><span style="--i:1">r</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">l</span><span style="--i:5">s</span></div>
+    <div class="wordmark" data-wave><span style="--i:0">B</span><span style="--i:1">r</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">l</span><span style="--i:5">s</span></div>
   </div>
   <div class="footer-legal container">
     <p>© <span data-year>2026</span> Brails. All rights reserved.</p>

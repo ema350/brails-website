@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@96,700&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/v2.css">
 <script>document.documentElement.classList.add('js')</script>
 <script src="assets/js/site.js" defer></script>
 </head>
@@ -64,7 +65,7 @@
 </header>
 <main id="main">
 
-<section class="container bhero">
+<section class="container"><div class="bhero">
   <p class="eyebrow" style="margin-bottom:0" data-reveal>Brails blog</p>
   <h1 class="display-xl" data-split>Notes on moving money across borders.</h1>
   <p class="lede" data-reveal style="--d:.2s">Guides for importers, product updates and plain-English explainers on how international payments work.</p>
@@ -74,12 +75,12 @@
     <button data-filter="product" aria-pressed="false">Product</button>
     <button data-filter="compliance" aria-pressed="false">Compliance</button>
   </div>
-</section>
+</div></section>
 
 <section class="pb-0" style="padding-bottom:96px">
   <div class="container">
     <a class="featured" href="#" data-cat="guides" data-reveal>
-      <div class="media"><img src="assets/img/container.jpg" alt="A gloved hand opening a shipping container"></div>
+      <div class="media"><img src="assets/img/photo-container.webp" alt="A gloved hand opening a shipping container"></div>
       <div class="txt">
         <div class="lbl"><b>Featured</b> Guides</div>
         <h2>The importer’s checklist for paying overseas suppliers</h2>
@@ -95,26 +96,33 @@
   <div class="container">
     <div class="posts-h" data-reveal><h2>Latest articles</h2><a class="link" href="#">View all articles <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="posts" data-stagger>
-      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/beads.jpg" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>How to pay a supplier in China from Nigeria</h3><p>What you need before you send: invoice, supplier details and a locked rate.</p><div class="meta"><span>6 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
-      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/podium.jpg" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>What a locked exchange rate actually means</h3><p>The difference between an indicative rate and the one your supplier receives.</p><div class="meta"><span>4 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
-      <a class="post" href="#" data-cat="product"><div class="media" style="background:#fff"><img class="fit" src="assets/img/globe.jpg" alt="" loading="lazy"><span class="cat">Product</span></div><div><h3>Save a supplier once, pay them for years</h3><p>Why saved beneficiaries cut payment errors and speed up repeat payments.</p><div class="meta"><span>5 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
-      <a class="post" href="#" data-cat="compliance"><div class="media"><img src="assets/img/portrait-laptop.jpg" alt="" loading="lazy"><span class="cat">Compliance</span></div><div><h3>KYB explained: what we ask for and why</h3><p>What business verification involves and how to get through it faster.</p><div class="meta"><span>7 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
-      <a class="post" href="#" data-cat="product"><div class="media" style="background:#fff"><img src="assets/img/wallet-3d.jpg" alt="" loading="lazy"><span class="cat">Product</span></div><div><h3>Holding stablecoins next to naira</h3><p>How USDC and USDT sit in the same wallet view as your fiat.</p><div class="meta"><span>4 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
-      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/lagos.jpg" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>Why every payment has a UETR</h3><p>Tracking a payment across banks with a single reference.</p><div class="meta"><span>5 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/blog-a.webp" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>How to pay a supplier in China from Nigeria</h3><p>What you need before you send: invoice, supplier details and a locked rate.</p><div class="meta"><span>6 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/blog-b.webp" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>What a locked exchange rate actually means</h3><p>The difference between an indicative rate and the one your supplier receives.</p><div class="meta"><span>4 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="product"><div class="media"><img src="assets/img/laptop-dashboard.webp" alt="" loading="lazy"><span class="cat">Product</span></div><div><h3>Save a supplier once, pay them for years</h3><p>Why saved beneficiaries cut payment errors and speed up repeat payments.</p><div class="meta"><span>5 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="compliance"><div class="media"><img src="assets/img/sme-portrait.webp" alt="" loading="lazy"><span class="cat">Compliance</span></div><div><h3>KYB explained: what we ask for and why</h3><p>What business verification involves and how to get through it faster.</p><div class="meta"><span>7 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="product"><div class="media"><img src="assets/img/blog-c.webp" alt="" loading="lazy"><span class="cat">Product</span></div><div><h3>Holding stablecoins next to naira</h3><p>How USDC and USDT sit in the same wallet view as your fiat.</p><div class="meta"><span>4 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
+      <a class="post" href="#" data-cat="guides"><div class="media"><img src="assets/img/hero-lagos.webp" alt="" loading="lazy"><span class="cat">Guides</span></div><div><h3>Why every payment has a UETR</h3><p>Tracking a payment across banks with a single reference.</p><div class="meta"><span>5 min read</span><span class="link">Read <svg class="ic" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 8H13M9 12L13 8L9 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></a>
     </div>
   </div>
 </section>
 
 <section style="padding-bottom:120px">
   <div class="container">
-    <div class="newsletter" data-reveal>
-      <svg class="ic envelope" viewBox="0 0 96 96" fill="none" aria-hidden="true" focusable="false"><rect x="12" y="20" width="72" height="56" rx="12" fill="#CCD9FB"/><path d="M16 28L48 52L80 28" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><h2>Get new articles by email.</h2><p>One email when something new is published. Unsubscribe anytime.</p></div>
-      <form class="nl-form" data-newsletter>
-        <label class="sr-only" for="nl">Email address</label>
-        <input id="nl" type="email" placeholder="you@company.com" required autocomplete="email">
-        <button class="btn btn-primary" type="submit">Subscribe</button>
-      </form>
+    <div class="nl2" data-reveal>
+      <img class="nl2-photo" src="assets/img/newsletter-photo.webp" alt="" loading="lazy">
+      <div class="nl2-copy">
+        <p class="eyebrow">The Brails newsletter</p>
+        <h2>Get new articles<br><span>by email.</span></h2>
+        <p class="nl2-sub">Guides, product news and stories from businesses paying across borders. One email when something new is published.</p>
+        <ul class="nl2-topics"><li><i style="background:#0036bb"></i>Product updates</li><li><i style="background:#149e5e"></i>Corridor guides</li><li><i style="background:#ee6002"></i>Customer stories</li></ul>
+        <form class="nl-form" data-newsletter>
+          <label class="sr-only" for="nl">Email address</label>
+          <input id="nl" type="email" placeholder="you@company.com" required autocomplete="email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="nl2-note">Unsubscribe anytime. We never share your email.</p>
+      </div>
+      <div class="nl2-toast" aria-hidden="true"><span class="nl2-check"><svg class="ic" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M2.8 6.2L4.9 8.3L9.2 3.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>You’re subscribed</b><small>Look out for our next article.</small></span></div>
     </div>
   </div>
 </section>
@@ -123,13 +131,13 @@
 <footer class="footer">
   <div class="footer-cols container">
     <div><h3>Products</h3><a href="cross-border-payments.html">Cross-border payments</a><a href="multi-currency-wallets.html">Multi-currency wallets</a><a href="smes.html">SMEs</a></div>
-    <div><h3>Company</h3><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="support.html">Support</a></div>
-    <div><h3>Legal</h3><a href="terms.html">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a><a href="security.html">Security</a></div>
+    <div><h3>Company</h3><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="support.html">Support</a><a href="security.html">Security</a></div>
+    <div><h3>Legal</h3><a href="terms.html">Terms of service</a><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a></div>
     <div><h3>Follow us</h3><a href="#">X</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="mailto:hello@onbrails.com">hello@onbrails.com</a></div>
   </div>
   <div class="footer-mark" aria-hidden="true">
     <div class="footer-rule"><span></span></div>
-    <div class="wordmark"><span style="--i:0">B</span><span style="--i:1">r</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">l</span><span style="--i:5">s</span></div>
+    <div class="wordmark" data-wave><span style="--i:0">B</span><span style="--i:1">r</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">l</span><span style="--i:5">s</span></div>
   </div>
   <div class="footer-legal container">
     <p>© <span data-year>2026</span> Brails. All rights reserved.</p>
