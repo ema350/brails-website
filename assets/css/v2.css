@@ -523,3 +523,6 @@
 .rv-row { border-bottom: 0; margin: 6px 0; padding: 9px 8px; }
 .rv-row:not(:last-child)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6.5px; height: 1px; background: var(--grey-200); }
 .rv-tag { font-size: 11.5px; padding: 3px 10px; }
+
+/* Hero buttons: 48px */
+:is(.hero-l,.phero,.smhero,.ahero,.bhero,.shero,.sxhero,.dxhero,.lhead) .btn-row .btn:not(.btn-sm) { height: 48px; padding: 0 20px; font-size: 16px; line-height: 24px; }
