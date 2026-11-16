@@ -464,3 +464,54 @@
 .js .how .step:nth-child(3) { transition-delay: 2.9s; } .js .how .step:nth-child(4) { transition-delay: 4.5s; }
 @media (prefers-reduced-motion: reduce) { .js .how .step { opacity: 1; transform: none; } }
 @media (max-width: 1080px) { .js .how .step { opacity: 1; transform: none; } }
+
+/* ---- Cross-border hero (Figma layout + entrance sequence) ---- */
+.cbhero .phero-grid { grid-template-columns: minmax(0, 600px) minmax(0, 1fr); }
+.cbvis { position: relative; height: 620px; }
+.cb-photo { position: absolute; left: 13.6%; right: 0; top: 0; bottom: 0; border-radius: 32px; overflow: hidden; }
+.cb-photo img { width: 100%; height: 100%; object-fit: cover; }
+.cb-chip { right: 24px; top: 24px; }
+.cb-widget { left: 0; top: 154px; width: min(380px, 62%); z-index: 2; box-shadow: 0 30px 60px rgba(0,13,46,.18); }
+/* entrance: crumbs .15s · photo .2–1.6s (fade, 1.06→1) · widget .8–1.6s (rise 56px) · "They receive" 1.5s · button press 2.6s · chip pops 3.0s */
+.js .cbhero .cb-a { opacity: 0; transform: translateY(14px); transition: opacity .5s cubic-bezier(0,0,.58,1), transform .5s cubic-bezier(0,0,.58,1); transition-delay: var(--d, 0s); }
+.js .cbhero.is-go .cb-a { opacity: 1; transform: none; }
+.js .cbhero .cb-photo { opacity: 0; transform: scale(1.06); }
+.js .cbhero.is-go .cb-photo { animation: cbPhoto 1.4s cubic-bezier(0,0,.58,1) .2s both; }
+@keyframes cbPhoto { 0% { opacity: 0; transform: scale(1.06); } 43% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+.js .cbhero .cb-widget { opacity: 0; transform: translateY(56px); }
+.js .cbhero.is-go .cb-widget { animation: cbWidget .8s cubic-bezier(0,0,.58,1) .8s both; }
+@keyframes cbWidget { 0% { opacity: 0; transform: translateY(56px); } 62% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+.js .cbhero .cb-recv { opacity: 0; transform: translateY(10px); }
+.js .cbhero.is-go .cb-recv { animation: cbRecv .4s cubic-bezier(0,0,.58,1) 1.5s both; }
+@keyframes cbRecv { to { opacity: 1; transform: none; } }
+.js .cbhero.is-go .cb-btn { animation: cbPress .3s ease-out 2.6s both; }
+@keyframes cbPress { 0%, 100% { transform: scale(1); } 40% { transform: scale(.96); } }
+.js .cbhero .cb-chip { opacity: 0; }
+.js .cbhero.is-go .cb-chip { animation: cbChip .5s cubic-bezier(.34,1.56,.64,1) 3s both, floaty 5s ease-in-out 3.5s infinite; }
+@keyframes cbChip { 0% { opacity: 0; transform: scale(.7); } 60% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+@media (max-width: 1240px) { .cbhero .phero-grid { grid-template-columns: 1fr; } .cbvis { max-width: 648px; width: 100%; margin: 0 auto; } }
+@media (max-width: 760px) {
+  .cbvis { height: auto; display: block; }
+  .cb-photo { position: relative; left: auto; height: 300px; border-radius: 24px; }
+  .cb-widget { position: relative; top: auto; width: auto; margin: -96px 16px 0; }
+  .cb-chip { right: 12px; top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .js .cbhero .cb-a, .js .cbhero .cb-photo, .js .cbhero .cb-widget, .js .cbhero .cb-recv, .js .cbhero .cb-chip { opacity: 1; transform: none; animation: none; } }
+
+/* ---- Cross-border pricing: colour-coded highlights + callouts (Figma) ---- */
+.rv-row.is-hl { background: transparent; }
+.rv-row[data-hl="fee"].is-hl { box-shadow: inset 0 0 0 1.5px #a959ff; }
+.rv-row[data-hl="rate"].is-hl { box-shadow: inset 0 0 0 1.5px #eb3693; }
+.rv-row[data-hl="eta"].is-hl { box-shadow: inset 0 0 0 1.5px #1e6ef4; }
+.rv-view { color: var(--blue); font-weight: 600; margin-left: 8px; }
+.callout { right: auto; left: calc(100% - 128px); box-shadow: 0 6px 16px rgba(0,13,46,.08); transform: translateX(24px); }
+.callout[data-for="fee"] { background: var(--purple-100); color: var(--purple-800); } .callout[data-for="fee"] .dot { background: #a959ff; }
+.callout[data-for="rate"] { background: var(--pink-100); color: var(--pink-800); } .callout[data-for="rate"] .dot { background: #eb3693; }
+.callout[data-for="eta"] { background: var(--info-100); color: var(--info-700); } .callout[data-for="eta"] .dot { background: #1e6ef4; }
+.cols-pricing { grid-template-columns: minmax(0, 532px) minmax(0, 1fr); gap: 80px; }
+@media (max-width: 1080px) { .cols-pricing { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+.cbhero .phero-grid > * { min-width: 0; }
+.cb-widget { width: 380px; max-width: calc(100% - 40px); }
+@media (max-width: 1360px) and (min-width: 1241px) { .cbhero .phero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; } .cb-photo { left: 24%; } }
+@media (max-width: 1240px) { .cbhero .phero-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) { .cb-widget { width: auto; max-width: none; } }

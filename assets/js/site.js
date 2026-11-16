@@ -160,16 +160,13 @@
     const callouts = $$('.callout', wrap);
     const place = () => callouts.forEach((c) => {
       const row = rows.find((r) => r.dataset.hl === c.dataset.for);
-      if (row) c.style.top = `${row.offsetTop + row.offsetParent.offsetTop + row.offsetHeight / 2 - c.offsetHeight / 2}px`;
+      if (row) { const w = wrap.getBoundingClientRect(), r = row.getBoundingClientRect(); c.style.top = `${r.top - w.top + r.height / 2 - c.offsetHeight / 2}px`; }
     });
     place();
     window.addEventListener('resize', place);
     if (reduce) { rows.forEach((r) => r.classList.add('is-hl')); callouts.forEach((c) => c.classList.add('is-on')); return; }
-    loopWhileVisible(wrap, rows.length + 1, 1800, (i) => {
-      place();
-      rows.forEach((r, j) => r.classList.toggle('is-hl', j < i));
-      callouts.forEach((c, j) => c.classList.toggle('is-on', j < i));
-    });
+    // Figma: each highlight appears once (1.0s, 1.35s, 1.7s), its callout slides in 0.1s later, and they stay.
+    onView(wrap, () => { place(); rows.forEach((r, j) => setTimeout(() => r.classList.add('is-hl'), 1000 + 350 * j)); callouts.forEach((c, j) => setTimeout(() => c.classList.add('is-on'), 1100 + 350 * j)); }, { threshold: 0.35 });
   });
 
   /* ---------- Code typing ---------- */
@@ -363,6 +360,9 @@
     };
     onView(wt, (vis) => { visible = vis; if (vis) run(); }, { track: true, threshold: 0.35 });
   });
+
+  /* ---------- Cross-border hero: Figma entrance sequence (runs once on load) ---------- */
+  $$('[data-cbhero]').forEach((h) => requestAnimationFrame(() => h.classList.add('is-go')));
 
   /* ---------- Footer: letters lift as the blue bar passes behind them ---------- */
   $$('[data-wave]').forEach((wm) => {

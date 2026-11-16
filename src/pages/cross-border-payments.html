@@ -1,34 +1,31 @@
 <!--@head title="Cross-border payments — Brails" desc="Send from your USD, NGN, KES or CNY balance to a recipient’s own bank account in ten destinations, in their own currency."-->
 <!--@nav active="products"-->
 
-<section class="phero">
+<section class="phero cbhero" data-cbhero>
   <div class="container phero-grid">
     <div class="phero-copy">
-      <div class="crumbs" data-reveal><span>Products</span><i>/</i><span class="pill">{{icon:send}} Cross-border payments</span></div>
+      <div class="crumbs cb-a" style="--d:.15s"><span class="pill">{{icon:send}} Cross-border payments</span></div>
       <h1 class="display-l" data-split>Pay anyone abroad, straight from your wallet.</h1>
-      <p class="lede" data-reveal style="--d:.2s">Send from your USD, NGN, KES or CNY balance to a recipient’s own bank account in ten destinations, in their own currency.</p>
-      <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
-      <div class="stats" data-stagger>
-        <div class="stat"><strong data-count="10">10</strong><span>destinations</span></div>
-        <div class="stat"><strong data-count="6" data-suffix="+">6+</strong><span>currencies supported</span></div>
-        <div class="stat"><strong>1–3</strong><span>business days to arrive</span></div>
+      <p class="lede cb-a" style="--d:.85s">Send from your USD, NGN, KES or CNY balance to a recipient’s own bank account in ten destinations, in their own currency.</p>
+      <div class="btn-row cb-a" style="--d:1s"><a class="btn btn-primary" href="{{SIGNUP}}">Create an account</a><a class="btn btn-outline" href="{{SALES}}">Talk to sales</a></div>
+      <div class="stats">
+        <div class="stat cb-a" style="--d:1.15s"><strong data-count="10">10</strong><span>destinations</span></div>
+        <div class="stat cb-a" style="--d:1.27s"><strong data-count="6" data-suffix="+">6+</strong><span>currencies supported</span></div>
       </div>
     </div>
-    <div class="visual" data-reveal style="--d:.15s">
-      <div class="photo" style="width:560px"><img src="assets/img/container.jpg" alt="A gloved hand opening a shipping container at a port"></div>
-      <span class="float-chip" style="right:32px;top:24px">{{flag:US}} Delivered to Chase Bank</span>
-      <div class="widget" style="top:154px">
+    <div class="cbvis">
+      <div class="cb-photo"><img src="assets/img/photo-container.webp" alt="A gloved hand opening a shipping container at a port" fetchpriority="high"></div>
+      <span class="float-chip cb-chip">{{flag:US}} Delivered to Chase Bank</span>
+      <div class="widget cb-widget">
         <h3>Send money</h3>
         <div class="field"><small>You send</small><div class="field-row"><strong>₦28,140,000.00</strong><span class="cur">{{flag:NG:sm}}NGN</span></div></div>
-        <div class="field"><small>They receive</small><div class="field-row"><strong>$18,400.00</strong><span class="cur">{{flag:US:sm}}USD</span></div></div>
+        <div class="field cb-recv"><small>They receive</small><div class="field-row"><strong>$18,400.00</strong><span class="cur">{{flag:US:sm}}USD</span></div></div>
         <div class="rows"><div><span>Recipient</span><b>Harbor &amp; Pine LLC</b></div><div><span>Transfer fee</span><b>$10.00</b></div><div><span>Estimated arrival</span><b>1–3 business days</b></div></div>
-        <a class="btn btn-primary btn-block" href="{{SIGNUP}}">Review and send</a>
+        <a class="btn btn-primary btn-block cb-btn" href="{{SIGNUP}}">Review and send</a>
       </div>
     </div>
   </div>
 </section>
-
-<!--@ticker-->
 
 <section class="section">
   <div class="container">
@@ -99,7 +96,7 @@
 </section>
 
 <section class="section">
-  <div class="container cols" style="grid-template-columns:532px 1fr;gap:80px">
+  <div class="container cols cols-pricing">
     <div class="copy-stack" data-reveal>
       <p class="eyebrow" style="margin-bottom:0">Pricing</p>
       <h2 class="h2" data-split>See every cost<br>before you send.</h2>
@@ -109,7 +106,6 @@
         <li>{{icon:checkCircle}} Exchange rate shown before you confirm</li>
         <li>{{icon:checkCircle}} Attach an invoice and a narration for your records</li>
       </ul>
-      <a class="link" href="{{SALES}}">See pricing {{icon:arrow}}</a>
     </div>
     <div class="review-wrap" data-review data-reveal style="--d:.15s">
       <div class="review">
@@ -122,8 +118,9 @@
           <div class="rv-row"><span>Amount to send</span><b>$1,500.00</b></div>
           <div class="rv-row" data-hl="fee"><span>Transfer fee</span><b>$10.00</b></div>
           <div class="rv-row" data-hl="rate"><span>Exchange rate</span><b>$1 = $1</b></div>
-          <div class="rv-row" data-hl="eta"><span>Estimated arrival</span><span class="rv-tag">1–3 business days</span></div>
+          <div class="rv-row" data-hl="eta"><span>Estimated arrival</span><b>1–3 business days</b></div>
           <div class="rv-row"><span>Narration</span><b>For services rendered</b></div>
+          <div class="rv-row"><span>Supporting document</span><b>Sales invoice_PDF <a class="rv-view" href="#" tabindex="-1">View</a></b></div>
           <div class="rv-row"><span>Recipient receives</span><b>$1,490.00</b></div>
         </div>
         <a class="btn btn-primary btn-block rv-btn" href="{{SIGNUP}}">Confirm</a>
