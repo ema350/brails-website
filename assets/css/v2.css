@@ -429,3 +429,38 @@
 .ticker li { gap: 14px; font-size: 22px; line-height: 27px; }
 .ticker .flag { width: 24px; height: 24px; box-shadow: none; }
 .ticker .tick-spark { width: 18px; height: 18px; margin: 0 32px 0 18px; color: #ccd9fb; animation: none; }
+
+/* ---- Landing "How it works": one synced 8s timeline (Figma keyframes) ----
+   0.6s line reaches stop 1 · 1.6s stop 2 · 3.2s stop 3 · 4.8s stop 4 · holds to 8s, then repeats */
+.js .how.is-running .rail-progress { animation: railFill2 8s infinite; }
+@keyframes railFill2 {
+  0%, 7.5% { transform: scaleX(0); animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  20%, 27.5% { transform: scaleX(.3333); animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  40%, 47.5% { transform: scaleX(.6667); animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  60%, 100% { transform: scaleX(1); }
+}
+.js .how.is-running .rail-dot { animation: railDot2 8s infinite; }
+@keyframes railDot2 {
+  0% { left: 13px; opacity: 0; } 5% { opacity: 1; }
+  7.5% { left: 13px; animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  20%, 27.5% { left: calc(13px + (100% - 40px) / 3); animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  40%, 47.5% { left: calc(13px + (100% - 40px) * 2 / 3); animation-timing-function: cubic-bezier(.42,0,.58,1); }
+  60%, 90% { left: calc(100% - 27px); opacity: 1; }
+  97.5%, 100% { left: calc(100% - 27px); opacity: 0; }
+}
+.stop.is-on span { transform: translateX(-50%); }
+.js .how.is-running .stop span { animation: stopPulse 8s infinite; }
+@keyframes stopPulse { 0% { transform: translateX(-50%) scale(1); } 2.5% { transform: translateX(-50%) scale(1.25); box-shadow: 0 0 0 8px rgba(26,196,142,.35); } 7.5%, 100% { transform: translateX(-50%) scale(1); } }
+.js .how.is-running .stop:nth-child(1) span, .js .how.is-running .step:nth-child(1) .step-ic { animation-delay: .6s; }
+.js .how.is-running .stop:nth-child(2) span, .js .how.is-running .step:nth-child(2) .step-ic { animation-delay: 1.6s; }
+.js .how.is-running .stop:nth-child(3) span, .js .how.is-running .step:nth-child(3) .step-ic { animation-delay: 3.2s; }
+.js .how.is-running .stop:nth-child(4) span, .js .how.is-running .step:nth-child(4) .step-ic { animation-delay: 4.8s; }
+.js .how.is-running .step-ic { animation: iconWiggle 8s infinite; }
+@keyframes iconWiggle { 0% { transform: rotate(0); } 3.1% { transform: rotate(-8deg); } 7.5%, 100% { transform: rotate(0); } }
+/* cards arrive once, just before their stop is reached (0.3s, 1.3s, 2.9s, 4.5s), on the same clock */
+.js .how .step { opacity: 0; transform: translateY(28px); transition: opacity .6s cubic-bezier(0,0,.58,1), transform .6s cubic-bezier(0,0,.58,1); }
+.js .how.has-run .step { opacity: 1; transform: none; }
+.js .how .step:nth-child(1) { transition-delay: .3s; } .js .how .step:nth-child(2) { transition-delay: 1.3s; }
+.js .how .step:nth-child(3) { transition-delay: 2.9s; } .js .how .step:nth-child(4) { transition-delay: 4.5s; }
+@media (prefers-reduced-motion: reduce) { .js .how .step { opacity: 1; transform: none; } }
+@media (max-width: 1080px) { .js .how .step { opacity: 1; transform: none; } }

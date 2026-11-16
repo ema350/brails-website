@@ -108,12 +108,12 @@
   /* ---------- How it works: stops + cards light up in sequence ---------- */
   $$('[data-how]').forEach((sec) => {
     const stops = $$('.stop', sec), steps = $$('.step', sec);
-    onView(sec, (vis) => sec.classList.toggle('is-running', vis && !reduce), { track: true, threshold: 0.3 });
-    if (reduce) return;
-    loopWhileVisible(sec, 4, 2000, (i) => {
-      stops.forEach((s, j) => s.classList.toggle('is-on', j === i));
-      steps.forEach((s, j) => s.classList.toggle('is-on', j === i));
-    });
+    // One 8s CSS timeline drives the line, the dot, the stop pulses and the icon wiggles (see v2.css),
+    // so everything stays in step. Restart it from zero each time the section comes into view.
+    onView(sec, (vis) => {
+      if (vis && !reduce) { sec.classList.remove('is-running'); void sec.offsetWidth; sec.classList.add('is-running', 'has-run'); }
+      else sec.classList.remove('is-running');
+    }, { track: true, threshold: 0.3 });
   });
 
   /* ---------- Generic sequencers ---------- */
