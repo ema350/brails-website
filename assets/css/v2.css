@@ -526,3 +526,12 @@
 
 /* Hero buttons: 48px */
 :is(.hero-l,.phero,.smhero,.ahero,.bhero,.shero,.sxhero,.dxhero,.lhead) .btn-row .btn:not(.btn-sm) { height: 48px; padding: 0 20px; font-size: 16px; line-height: 24px; }
+
+/* Landing security badges + licence flags */
+.badges { gap: 36px; padding: 8px 0 4px; }
+.badges img { mix-blend-mode: normal; width: auto; }
+.badges img.b-iso { height: 76px; }
+.badges img.b-pci { height: 46px; }
+.lic { display: flex; align-items: center; gap: 12px; }
+.lic .flag.md { width: 32px; height: 32px; flex: none; box-shadow: 0 0 0 1px rgba(16,24,40,.06); }
+@media (max-width: 560px) { .badges { gap: 24px; } .badges img.b-iso { height: 60px; } .badges img.b-pci { height: 36px; } }
