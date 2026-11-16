@@ -258,7 +258,7 @@
     const q = $('.acc-q', item);
     q.addEventListener('click', () => { const open = !item.classList.contains('is-open'); item.classList.toggle('is-open', open); q.setAttribute('aria-expanded', String(open)); });
   });
-  const openHash = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t?.classList.contains('acc-item')) { t.classList.add('is-open'); $('.acc-q', t).setAttribute('aria-expanded', 'true'); setTimeout(() => t.scrollIntoView({ block: 'center' }), 50); } };
+  const openHash = () => { const t = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null; if (t && t.classList.contains('acc-item')) { t.classList.add('is-open'); $('.acc-q', t).setAttribute('aria-expanded', 'true'); setTimeout(() => t.scrollIntoView({ block: 'center' }), 50); } };
   openHash(); window.addEventListener('hashchange', openHash);
 
   /* ---------- Newsletter ---------- */
@@ -307,7 +307,12 @@
       return [x + el.offsetWidth * fx, y + el.offsetHeight * fy];
     };
     let cam0 = [0, 0, 1];
-    const camTo = (x, y, s) => { cam0 = [x, y, s]; cam.style.transform = `translate(${-x * s}px, ${-y * s}px) scale(${s})`; };
+    const camTo = (x, y, s) => {
+      // keep the camera inside the dashboard so no empty edge shows, whatever the frame size
+      const maxX = Math.max(0, 1152 - view.clientWidth / s), maxY = Math.max(0, cam.offsetHeight - view.clientHeight / s);
+      x = Math.min(Math.max(0, x), maxX); y = Math.min(Math.max(0, y), maxY);
+      cam0 = [x, y, s]; cam.style.transform = `translate(${-x * s}px, ${-y * s}px) scale(${s})`;
+    };
     const ptrTo = ([x, y]) => { const [cx, cy, s] = cam0; ptr.style.transform = `translate(${(x - cx) * s}px, ${(y - cy) * s}px)`; };
     const apply = (i) => {
       const d = data[i], flagHtml = $('.flag', tabs[i]).outerHTML;
@@ -325,7 +330,7 @@
     const run = async () => {
       if (running) return; running = true;
       while (visible) {
-        const s0 = fit(), zs = Math.min(1.05, s0 * 1.6);
+        const s0 = fit(), zs = s0 < 0.75 ? Math.min(1.05, s0 * 1.6) : s0 * 1.45;
         const vw = view.clientWidth / zs, vh = view.clientHeight / zs;
         // 1. overview
         camTo(0, 0, s0); ptrTo([760, 560]);
