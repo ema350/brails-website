@@ -423,3 +423,9 @@
 .dxhero-in > * { max-width: 100%; min-width: 0; }
 .dx-term { min-width: 0; } .dx-win { overflow: hidden; } .dx-panes > div { min-width: 0; } .dx-panes .code-body { overflow-x: auto; }
 @media (max-width: 760px) { .dxhero h1 { font-size: 40px; } .dxhero .btn-row { justify-content: center; } .dx-panes .code-body { font-size: 12px; line-height: 22px; min-height: 0; } }
+
+/* ---- Corridor ticker (matches Figma: 64px band, no edge fade) ---- */
+.ticker { height: 64px; -webkit-mask-image: none; mask-image: none; }
+.ticker li { gap: 14px; font-size: 22px; line-height: 27px; }
+.ticker .flag { width: 24px; height: 24px; box-shadow: none; }
+.ticker .tick-spark { width: 18px; height: 18px; margin: 0 32px 0 18px; color: #ccd9fb; animation: none; }
