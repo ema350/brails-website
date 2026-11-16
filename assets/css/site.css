@@ -517,13 +517,12 @@ a.nav-link:hover::after, a.nav-link.is-active::after { transform: scaleX(1); }
 .wire.out i { background: var(--blue); }
 @keyframes packet { 0% { left: -5px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: calc(100% - 5px); opacity: 0; } }
 .hub { background: var(--navy-2); border-radius: 32px; padding: 28px; aspect-ratio: 1; display: grid; place-content: center; justify-items: center; text-align: center; gap: 14px; color: #fff; position: relative; overflow: hidden; }
-.hub::before { content: ""; position: absolute; inset: -40%; background: conic-gradient(from 0deg, transparent 0 70%, rgba(153,180,247,.25) 85%, transparent 100%); animation: spin 6s linear infinite; }
 .hub > * { position: relative; }
 .hub small { font-weight: 600; font-size: 12px; letter-spacing: .08em; color: var(--blue-100); }
 .hub strong { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1.05; }
 .ccys { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 260px; padding-top: 8px; }
-.ccys span { font-family: var(--geist); font-weight: 500; font-size: 13px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.14); transition: background-color .4s, color .4s; }
-.ccys span.is-on { background: #fff; color: var(--navy-2); }
+.ccys > span { font-family: var(--geist); font-weight: 500; font-size: 13px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.14); transition: background-color .4s, color .4s; }
+.ccys > span.is-on { background: #fff; color: var(--navy-2); }
 
 /* Virtual accounts */
 .va-row { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 18px; background: var(--grey-50); }
