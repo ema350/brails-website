@@ -3,13 +3,14 @@
 // Directives inside page sources:
 //   <!--@head title="…" desc="…"-->   <!--@nav active="products"-->   <!--@footer-->
 //   <!--@ticker-->  <!--@cta-->  <!--@setsail-->  <!--@licences-->  <!--@explore exclude="wallets"-->
-//   <!--@legaltabs active="terms"-->
+//   <!--@legaltabs active="terms"-->   <!--@blogfeatured-->  <!--@blogposts-->  <!--@newsletter-->
 //   {{icon:name}} / {{icon:name:class}}   {{flag:US}} / {{flag:US:class}}   {{APP}} {{SIGNUP}} {{SALES}} {{DOCS}} {{EMAIL}}
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { icons, flag, countries, token } from './icons.mjs';
 import { collections } from './support-data.mjs';
+import { posts } from './blog-data.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -265,7 +266,139 @@ const collectionPage = (c) => `<!--@head title="${c.label} — Brails Support" d
 <!--@contact-->
 <!--@footer-->`;
 
-const directives = { head, nav, footer, ticker, cta, setsail, licences, explore, legaltabs, helpcards, contact, searchindex: searchIndex, searchbar: () => searchbar() };
+
+// ---- Blog -------------------------------------------------------------------------------
+const CATS = { guides: 'Guides', product: 'Product', compliance: 'Compliance' };
+const byDate = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const fmtDate = (iso, long) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${long ? MONTHS[m - 1] : MONTHS[m - 1].slice(0, 3)} ${y}`; };
+const fmtDateLong = (iso) => fmtDate(iso, true);
+const plain = (b) => (typeof b === 'string' ? b : Object.values(b).flat(2).join(' ')).replace(/<[^>]+>/g, '');
+const readTime = (p) => Math.max(2, Math.ceil([p.title, p.excerpt, ...p.body.map(plain)].join(' ').split(/\s+/).length / 200));
+const postHref = (p) => `blog-${p.slug}.html`;
+const dateTag = (p) => `<time datetime="${p.date}">${fmtDate(p.date)}</time>`;
+const slugify = (t) => t.toLowerCase().replace(/<[^>]+>/g, '').replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+const postCard = (p) => `<a class="post" href="${postHref(p)}" data-cat="${p.cat}"><div class="media"><img src="assets/img/${p.img}" alt="" loading="lazy"><span class="cat">${CATS[p.cat]}</span></div><div><p class="post-date">${icons.clock('ic')}${dateTag(p)}</p><h3>${p.title}</h3><p>${p.excerpt}</p><div class="meta"><span>${readTime(p)} min read</span><span class="link">Read ${icons.arrow()}</span></div></div></a>`;
+
+const blogfeatured = () => {
+  const p = byDate.find((x) => x.featured) || byDate[0];
+  return `<a class="featured" href="${postHref(p)}" data-cat="${p.cat}" data-reveal>
+      <div class="media"><img src="assets/img/${p.img}" alt="${p.alt || ''}"></div>
+      <div class="txt">
+        <div class="lbl"><b>Featured</b> ${CATS[p.cat]}</div>
+        <h2>${p.title}</h2>
+        <p>${p.excerpt}</p>
+        <div class="author"><span class="avatar">B</span><div><b>Brails team</b><small>${dateTag(p)} · ${readTime(p)} min read</small></div></div>
+        <span class="link">Read the ${p.cat === 'guides' ? 'guide' : 'article'} ${icons.arrow()}</span>
+      </div>
+    </a>`;
+};
+
+const attr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+const MONTH = (iso) => { const [y, m] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${y}`; };
+const blogarchive = () => {
+  const groups = [];
+  for (const p of byDate) { const g = MONTH(p.date); if (!groups.length || groups.at(-1).g !== g) groups.push({ g, items: [] }); groups.at(-1).items.push(p); }
+  const count = (c) => byDate.filter((p) => c === 'all' || p.cat === c).length;
+  const row = (p) => `<a class="arow" href="${postHref(p)}" data-cat="${p.cat}" data-text="${attr([p.title, p.excerpt, CATS[p.cat], ...p.body.map(plain)].join(' ').toLowerCase())}">
+          <span class="arow-date">${dateTag(p)}</span>
+          <span class="arow-main"><span class="arow-cat">${CATS[p.cat]}</span><span class="arow-title">${p.title}</span><span class="arow-ex">${p.excerpt}</span><span class="arow-meta">${dateTag(p)} · ${readTime(p)} min read</span></span>
+          <span class="arow-read">${icons.clock('ic')}${readTime(p)} min read</span>
+          <span class="arow-img"><img src="assets/img/${p.img}" alt="" loading="lazy"></span>
+        </a>`;
+  return `<div class="archive" data-archive>
+    <div class="archive-bar" data-reveal>
+      <div class="filters" role="group" aria-label="Filter by category">${['all', ...Object.keys(CATS)].map((c, i) => `<button type="button" data-afilter="${c}" aria-pressed="${!i}"${i ? '' : ' class="is-on"'}>${c === 'all' ? 'All' : CATS[c]} <span>${count(c)}</span></button>`).join('')}</div>
+      <label class="asearch">${icons.search('ic')}<span class="sr-only">Search articles</span><input type="search" placeholder="Search articles" autocomplete="off" data-asearch></label>
+    </div>
+    <p class="archive-count" data-acount aria-live="polite">${byDate.length} articles</p>
+    ${groups.map((g) => `<section class="agroup" data-agroup data-reveal>
+      <h2 class="agroup-h">${g.g} <span>${g.items.length}</span></h2>
+      <div class="alist">
+        ${g.items.map(row).join('\n        ')}
+      </div>
+    </section>`).join('\n    ')}
+    <div class="aempty" data-aempty hidden>${icons.search('ic')}<b>No articles found</b><p>Try another word, or <button type="button" data-areset>show all articles</button>.</p></div>
+  </div>`;
+};
+const blogposts = () => `<div class="posts" data-stagger>${byDate.filter((p) => !p.featured).map(postCard).join('')}</div>`;
+
+const newsletter = ({ top } = {}) => `<section style="padding-bottom:120px${top ? ';padding-top:120px' : ''}">
+  <div class="container">
+    <div class="nl2" data-reveal>
+      <img class="nl2-photo" src="assets/img/newsletter-photo.webp" alt="" loading="lazy">
+      <div class="nl2-copy">
+        <p class="eyebrow">The Brails newsletter</p>
+        <h2>Get new articles<br><span>by email.</span></h2>
+        <p class="nl2-sub">Guides, product news and stories from businesses paying across borders. One email when something new is published.</p>
+        <ul class="nl2-topics"><li><i style="background:#0036bb"></i>Product updates</li><li><i style="background:#149e5e"></i>Corridor guides</li><li><i style="background:#ee6002"></i>Customer stories</li></ul>
+        <form class="nl-form" data-newsletter>
+          <label class="sr-only" for="nl">Email address</label>
+          <input id="nl" type="email" placeholder="you@company.com" required autocomplete="email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="nl2-note">Unsubscribe anytime. We never share your email.</p>
+      </div>
+      <div class="nl2-toast" aria-hidden="true"><span class="nl2-check">${icons.check()}</span><span><b>You’re subscribed</b><small>Look out for our next article.</small></span></div>
+    </div>
+  </div>
+</section>`;
+
+const pblock = (b) => {
+  if (typeof b === 'string') return `<p>${b}</p>`;
+  if (b.h) return `<h2 id="${slugify(b.h)}">${b.h}</h2>`;
+  if (b.note) return `<aside class="pnote">${icons.sparkles('ic')}<p>${b.note}</p></aside>`;
+  return block(b);
+};
+const postPage = (p) => {
+  const heads = p.body.filter((b) => b.h);
+  const related = [...byDate.filter((x) => x !== p && x.cat === p.cat), ...byDate.filter((x) => x !== p && x.cat !== p.cat)].slice(0, 3);
+  const i = byDate.indexOf(p), newer = byDate[i - 1], older = byDate[i + 1];
+  const pn = (x, dir) => (x ? `<a class="pn pn-${dir}" href="${postHref(x)}"><small>${dir === 'prev' ? 'Newer article' : 'Older article'}</small><b>${x.title}</b></a>` : '<span></span>');
+  return `<!--@head title="${esc(p.title)} — Brails Blog" desc="${p.excerpt}"-->
+<!--@nav active="blog"-->
+<div class="rprogress" data-progress aria-hidden="true"><span></span></div>
+<article class="post-page">
+<div class="container">
+  <header class="phead">
+    <nav class="crumb" aria-label="Breadcrumb" data-reveal><a href="blog.html">Blog</a>${icons.chevron('crumb-chev')}<a href="blog.html?cat=${p.cat}">${CATS[p.cat]}</a></nav>
+    <h1 data-split>${p.title}</h1>
+    <p class="lede" data-reveal style="--d:.15s">${p.excerpt}</p>
+    <div class="pmeta" data-reveal style="--d:.25s">
+      <div class="author"><span class="avatar">B</span><div><b>Brails team</b><small>Published ${`<time datetime="${p.date}">${fmtDateLong(p.date)}</time>`}</small></div></div>
+      <span class="pmeta-sep" aria-hidden="true"></span>
+      <span class="pmeta-item">${icons.clock('ic')}${readTime(p)} min read</span>
+      <span class="pmeta-item"><span class="pcat">${CATS[p.cat]}</span></span>
+    </div>
+  </header>
+  <figure class="pcover" data-reveal style="--d:.3s"><img src="assets/img/${p.img}" alt="${p.alt || ''}"></figure>
+  <div class="pbody">
+    <aside class="pside">
+      ${heads.length > 1 ? `<nav class="toc ptoc" data-ptoc aria-label="On this page"><h2>On this page</h2>${heads.map((h, k) => `<a href="#${slugify(h.h)}"${k === 0 ? ' class="is-active"' : ''}>${h.h}</a>`).join('')}</nav>` : ''}
+      <div class="pshare"><p>Share this article</p><div><button type="button" class="pshare-btn" data-copy-url>${icons.copy('ic')}<span>Copy link</span></button><a class="pshare-btn" data-share="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a><a class="pshare-btn" data-share="x" href="#" target="_blank" rel="noopener">X</a></div></div>
+    </aside>
+    <div class="prose">
+      ${p.body.map(pblock).join('\n      ')}
+      <div class="pend">
+        <div class="author"><span class="avatar">B</span><div><b>Written by the Brails team</b><small>Questions about this article? Email <a href="{{EMAIL}}">hello@onbrails.com</a></small></div></div>
+      </div>
+      <nav class="pnav" aria-label="More articles">${pn(newer, 'prev')}${pn(older, 'next')}</nav>
+    </div>
+  </div>
+</div>
+</article>
+<section class="section section-grey">
+  <div class="container">
+    <div class="posts-h" data-reveal><h2>Keep reading</h2><a class="link" href="blog-articles.html">All articles ${icons.arrow()}</a></div>
+    <div class="posts" data-stagger>${related.map(postCard).join('')}</div>
+  </div>
+</section>
+<!--@newsletter top="1"-->
+<!--@footer-->`;
+};
+
+const directives = { blogfeatured, blogposts, blogarchive, newsletter, head, nav, footer, ticker, cta, setsail, licences, explore, legaltabs, helpcards, contact, searchindex: searchIndex, searchbar: () => searchbar() };
 
 function render(src) {
   let out = src.replace(/<!--@(\w+)([^>]*?)-->/g, (m, name, a) => {
@@ -292,4 +425,8 @@ for (const f of readdirSync(pagesDir).filter((f) => f.endsWith('.html'))) {
 for (const c of collections) {
   writeFileSync(join(root, `support-${c.slug}.html`), render(collectionPage(c)));
   console.log('built', `support-${c.slug}.html`);
+}
+for (const p of posts) {
+  writeFileSync(join(root, postHref(p)), render(postPage(p)));
+  console.log('built', postHref(p));
 }

@@ -227,7 +227,74 @@
       const f = b.dataset.filter;
       $$('[data-cat]').forEach((p) => p.classList.toggle('is-hidden', f !== 'all' && p.dataset.cat !== f));
     });
+    // blog.html?cat=guides opens with that filter applied (used by the breadcrumb on post pages)
+    const cat = new URLSearchParams(location.search).get('cat');
+    if (cat) $(`[data-filter="${CSS.escape(cat)}"]`, filters)?.click();
   }
+
+  /* ---------- Blog: all articles (filter + search) ---------- */
+  const arch = $('[data-archive]');
+  if (arch) {
+    const rows = $$('.arow', arch), groups = $$('[data-agroup]', arch), input = $('[data-asearch]', arch);
+    const count = $('[data-acount]', arch), empty = $('[data-aempty]', arch);
+    let cat = new URLSearchParams(location.search).get('cat') || 'all';
+    if (!$(`[data-afilter="${CSS.escape(cat)}"]`, arch)) cat = 'all';
+    const apply = () => {
+      const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      let n = 0;
+      rows.forEach((r) => { const ok = (cat === 'all' || r.dataset.cat === cat) && words.every((w) => r.dataset.text.includes(w)); r.hidden = !ok; if (ok) n++; });
+      groups.forEach((g) => { const v = $$('.arow', g).filter((r) => !r.hidden).length; g.hidden = !v; $('.agroup-h span', g).textContent = v; });
+      count.textContent = `${n} article${n === 1 ? '' : 's'}`;
+      empty.hidden = n > 0;
+      $$('[data-afilter]', arch).forEach((b) => { const on = b.dataset.afilter === cat; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
+    };
+    arch.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-afilter]');
+      if (b) { cat = b.dataset.afilter; apply(); }
+      if (e.target.closest('[data-areset]')) { input.value = ''; cat = 'all'; apply(); input.focus(); }
+    });
+    input.addEventListener('input', apply);
+    apply();
+  }
+
+  /* ---------- Blog post: reading progress + share ---------- */
+  const prog = $('[data-progress]');
+  if (prog) {
+    const art = $('.prose');
+    let ticking = false;
+    const upd = () => {
+      const r = art.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight * 0.6)));
+      prog.style.setProperty('--p', p.toFixed(4)); ticking = false;
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+  const ptoc = $('[data-ptoc]');
+  if (ptoc) {
+    const links = $$('a', ptoc), heads = links.map((a) => document.getElementById(a.getAttribute('href').slice(1)));
+    let ticking = false;
+    const spy = () => {
+      const line = innerHeight * 0.3;
+      let k = 0;
+      heads.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) k = i; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) k = heads.length - 1;
+      links.forEach((l, i) => l.classList.toggle('is-active', i === k)); ticking = false;
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+    spy();
+  }
+  const pageUrl = location.href.split('#')[0];
+  $$('[data-share]').forEach((a) => {
+    const u = encodeURIComponent(pageUrl), t = encodeURIComponent(document.title);
+    a.href = a.dataset.share === 'linkedin' ? `https://www.linkedin.com/sharing/share-offsite/?url=${u}` : `https://x.com/intent/post?url=${u}&text=${t}`;
+  });
+  $$('[data-copy-url]').forEach((b) => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(pageUrl); } catch (e) { /* ignore */ }
+    const lbl = $('span', b), was = lbl.textContent;
+    b.classList.add('is-copied'); lbl.textContent = 'Link copied';
+    setTimeout(() => { b.classList.remove('is-copied'); lbl.textContent = was; }, 1600);
+  }));
 
   /* ---------- Support search (across every collection) ---------- */
   $$('[data-search]').forEach((form) => {

@@ -14,6 +14,8 @@ Static website built from the Brails Figma prototype (Figma file *Brails Busines
 | Support | `support.html` |
 | Developers | `developers.html` |
 | Blog | `blog.html` |
+| Blog: all articles | `blog-articles.html` |
+| Blog posts | `blog-<slug>.html` (one per post) |
 | Cookie policy | `cookie-policy.html` |
 | Terms of service | `terms.html` |
 | Privacy policy | `privacy.html` |
@@ -25,6 +27,7 @@ Edit the sources in `src/`, not the HTML files in the repo root. The root files 
 
 - `src/pages/*.html`: page content.
 - `src/build.mjs`: shared parts (head, nav, footer, ticker, CTA, licences, legal tabs) and the **links** used across the site (`LINKS` at the top: app sign-in/sign-up URL, sales email, API docs URL, social links).
+- `src/blog-data.mjs`: blog posts (title, category, publish date, cover image and article body). The blog cards, the All articles page and each post page are generated from this file; read time is worked out from the word count. To add a post, add an entry and rebuild.
 - `src/icons.mjs`: inline SVG icons and flags exported from Figma.
 - `assets/css/site.css`: all styles. Design tokens are at the top.
 - `assets/js/site.js`: animations and interactions.
