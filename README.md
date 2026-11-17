@@ -40,9 +40,12 @@ node src/build.mjs
 
 ## Deploying
 
-The repo root is the site. No build step is needed on the host because the generated HTML is committed.
+The repo root is the site. Vercel runs `node src/build.mjs` on every push (set in `vercel.json`), so an edit to any file in `src/` reaches the site without rebuilding locally. You can edit copy straight on GitHub: open the file in `src/`, click the pencil icon and commit to `staging`. The staging link updates about a minute later.
 
-- **Vercel / Netlify:** import the repo, set the framework to "Other", leave the build command empty and set the output/publish directory to `.` (root). Point the staging site at the `staging` branch.
+Edit the files in `src/`, not the generated `.html` files at the repo root: the build overwrites those.
+
+- **Vercel:** build settings come from `vercel.json` (build command `node src/build.mjs`, output directory `.`). Point the staging site at the `staging` branch.
+- **Netlify:** set the build command to `node src/build.mjs` and the publish directory to `.` (root).
 - **GitHub Pages:** Settings → Pages → deploy from the `staging` branch, root folder.
 
 ## Notes
