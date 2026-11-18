@@ -333,17 +333,111 @@
     f.outerHTML = '<p class="nl-done" role="status">Thanks, you’re on the list. Look out for our next article.</p>';
   }));
 
-  /* ---------- SMEs calculator ---------- */
-  $$('[data-calc]').forEach((c) => {
-    const input = $('input', c), out = $('[data-out]', c), rate = parseFloat(c.dataset.rate);
-    const fmt = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const upd = () => {
-      const v = parseFloat(input.value.replace(/[^\d.]/g, '')) || 0;
-      out.textContent = '¥' + fmt(v / rate);
+  /* ---------- Transaction calculators (Cross-border payments + SMEs heroes) ---------- */
+  const fxClosers = [];
+  $$('[data-fx]').forEach((f) => {
+    const R = JSON.parse(f.dataset.rates);
+    const st = { send: f.dataset.send, receive: f.dataset.receive, drive: 'send' };
+    const inp = { send: $('[data-fx-in="send"]', f), receive: $('[data-fx-in="receive"]', f) };
+    const rateEl = $('[data-fx-rate]', f);
+    const num = (v) => parseFloat(String(v).replace(/[^\d.]/g, '')) || 0;
+    const fmtN = (n, d) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+    const fmt = (code, n) => R[code][1] + fmtN(n, R[code][2]);
+    const val = { send: num(inp.send.value), receive: num(inp.receive.value) };
+    const other = (s) => (s === 'send' ? 'receive' : 'send');
+    // Shrink the amount text when a long number doesn't fit (small phones, large VND/UGX amounts)
+    const fit = (el) => {
+      el.style.fontSize = '';
+      let fs = parseFloat(getComputedStyle(el).fontSize);
+      while (el.scrollWidth > el.clientWidth + 1 && fs > 14) { fs -= 1; el.style.fontSize = `${fs}px`; }
     };
-    input.addEventListener('input', upd);
-    input.addEventListener('blur', () => { const v = parseFloat(input.value.replace(/[^\d.]/g, '')) || 0; input.value = '₦' + fmt(v); upd(); });
-    input.addEventListener('focus', () => { input.value = input.value.replace(/[^\d.]/g, ''); });
+    const render = (skip) => {
+      const d = st.drive, o = other(d);
+      val[o] = (val[d] / R[st[d]][0]) * R[st[o]][0];
+      ['send', 'receive'].forEach((s) => { if (s !== skip) inp[s].value = fmt(st[s], val[s]); fit(inp[s]); });
+      const r = R[st.send][0] / R[st.receive][0];
+      rateEl.textContent = st.send === st.receive ? 'No conversion'
+        : r >= 1 ? `1 ${st.receive} = ${R[st.send][1]}${fmtN(r, 2)}` : `1 ${st.send} = ${R[st.receive][1]}${fmtN(1 / r, 2)}`;
+    };
+    addEventListener('resize', () => { fit(inp.send); fit(inp.receive); }, { passive: true });
+    requestAnimationFrame(() => { fit(inp.send); fit(inp.receive); });
+    ['send', 'receive'].forEach((s) => {
+      const el = inp[s];
+      el.addEventListener('focus', () => { el.value = val[s] ? String(+val[s].toFixed(R[st[s]][2])) : ''; });
+      el.addEventListener('input', () => {
+        let v = el.value.replace(/[^\d.]/g, '');
+        const i = v.indexOf('.');
+        if (i > -1) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/\./g, '').slice(0, R[st[s]][2]);
+        if (v !== el.value) el.value = v;
+        st.drive = s; val[s] = num(v); render(s);
+      });
+      el.addEventListener('blur', () => render());
+      el.closest('.field').addEventListener('click', (e) => { if (!e.target.closest('.fx-pick') && e.target !== el) el.focus(); });
+    });
+
+    $$('[data-fx-pick]', f).forEach((p) => {
+      const side = p.dataset.fxPick, btn = $('button', p), menu = $('[role="listbox"]', p), opts = $$('[role="option"]', p);
+      let active = null;
+      const setActive = (o) => {
+        opts.forEach((x) => x.classList.toggle('is-active', x === o));
+        active = o; menu.setAttribute('aria-activedescendant', o.id); o.scrollIntoView({ block: 'nearest' });
+      };
+      const field = p.closest('.field');
+      const close = (refocus) => {
+        if (menu.hidden) return;
+        menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); p.classList.remove('is-open'); field.classList.remove('fx-open');
+        if (refocus) btn.focus();
+      };
+      const open = () => {
+        fxClosers.forEach((c) => c());
+        // Fit the list in the space left inside the section (heroes clip overflow): open upwards if there's more room above
+        const clip = (p.closest('section') || document.body).getBoundingClientRect(), b = btn.getBoundingClientRect();
+        const below = Math.min(clip.bottom, innerHeight) - b.bottom - 20, above = b.top - Math.max(clip.top, 84) - 20;
+        const up = below < 220 && above > below;
+        p.classList.toggle('is-up', up);
+        menu.style.maxHeight = `${Math.round(Math.max(160, Math.min(300, up ? above : below)))}px`;
+        menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); p.classList.add('is-open'); field.classList.add('fx-open');
+        menu.focus({ preventScroll: true });
+        setActive(opts.find((o) => o.dataset.code === st[side]) || opts[0]);
+      };
+      fxClosers.push(() => close(false));
+      const choose = (o) => {
+        const code = o.dataset.code;
+        if (code !== st[side]) {
+          st[side] = code;
+          st.drive = other(side); // keep the amount on the other side, recalculate this one
+          opts.forEach((x) => x.setAttribute('aria-selected', String(x === o)));
+          $('[data-fx-code]', btn).textContent = code;
+          $('.flag', btn).replaceWith($('.flag', o).cloneNode(true));
+          btn.setAttribute('aria-label', `${side === 'send' ? 'Currency you send' : 'Currency they receive'}: ${o.dataset.name}`);
+          $(`#${inp[side].getAttribute('aria-describedby')}`).textContent = `in ${o.dataset.name}`;
+          render();
+        }
+        close(true);
+      };
+      btn.addEventListener('click', () => (menu.hidden ? open() : close(true)));
+      btn.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(); } });
+      opts.forEach((o) => {
+        o.addEventListener('click', () => choose(o));
+        o.addEventListener('mousemove', () => { if (active !== o) setActive(o); });
+      });
+      menu.addEventListener('keydown', (e) => {
+        const i = opts.indexOf(active);
+        if (e.key === 'ArrowDown') { e.preventDefault(); setActive(opts[Math.min(opts.length - 1, i + 1)]); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(opts[Math.max(0, i - 1)]); }
+        else if (e.key === 'Home') { e.preventDefault(); setActive(opts[0]); }
+        else if (e.key === 'End') { e.preventDefault(); setActive(opts[opts.length - 1]); }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (active) choose(active); }
+        else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+        else if (e.key === 'Tab') close(false);
+        else if (/^[a-z]$/i.test(e.key)) {
+          const k = e.key.toUpperCase(), from = opts.slice(i + 1).concat(opts.slice(0, i + 1));
+          const hit = from.find((o) => o.dataset.code.startsWith(k) || o.dataset.name.toUpperCase().startsWith(k));
+          if (hit) setActive(hit);
+        }
+      });
+      document.addEventListener('click', (e) => { if (!p.contains(e.target)) close(false); });
+    });
   });
 
   /* ---------- Legal: table of contents scroll spy ---------- */

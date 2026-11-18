@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { icons, flag, countries, token } from './icons.mjs';
 import { collections } from './support-data.mjs';
 import { posts } from './blog-data.mjs';
+import { fx } from './fx-data.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -267,6 +268,42 @@ const collectionPage = (c) => `<!--@head title="${c.label} — Brails Support" d
 <!--@footer-->`;
 
 
+// ---- Transaction calculator (Cross-border payments + SMEs heroes) -------------------------
+const fxMap = Object.fromEntries(fx.map((c) => [c.code, c]));
+const fxNum = (n, d) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+const fxFmt = (code, n) => fxMap[code].symbol + fxNum(n, fxMap[code].decimals);
+const fxRate = (send, recv) => {
+  if (send === recv) return 'No conversion';
+  const r = fxMap[send].perUSD / fxMap[recv].perUSD;
+  return r >= 1 ? `1 ${recv} = ${fxMap[send].symbol}${fxNum(r, 2)}` : `1 ${send} = ${fxMap[recv].symbol}${fxNum(1 / r, 2)}`;
+};
+let fxCount = 0;
+const fxPicker = (uid, side, code) => {
+  const label = side === 'send' ? 'Currency you send' : 'Currency they receive';
+  return `<div class="fx-pick" data-fx-pick="${side}">
+          <button type="button" class="cur fx-cur" aria-haspopup="listbox" aria-expanded="false" aria-controls="${uid}-${side}" aria-label="${label}: ${fxMap[code].name}">${flag(fxMap[code].country, 'sm')}<span data-fx-code>${code}</span>${icons.chevron('fx-chev')}</button>
+          <ul class="fx-menu" id="${uid}-${side}" role="listbox" aria-label="${label}" tabindex="-1" hidden>${fx.filter((c) => c[side]).map((c) => `<li role="option" id="${uid}-${side}-${c.code}" data-code="${c.code}" data-name="${c.name}" aria-selected="${c.code === code}">${flag(c.country, 'sm')}<b>${c.code}</b><span>${c.name}</span>${icons.check('fx-tick')}</li>`).join('')}</ul>
+        </div>`;
+};
+const calc = ({ send = 'NGN', amount = '1000000', receive = 'USD', over = '', title = '', sendLabel = 'You send', receiveLabel = 'They receive', cta = 'Get started', cls = 'calc', recvCls = '', btnCls = '', rows = 'cb', reveal = '' }) => {
+  const uid = `fx${++fxCount}`, a = Number(amount), out = (a / fxMap[send].perUSD) * fxMap[receive].perUSD;
+  const rates = JSON.stringify(Object.fromEntries(fx.map((c) => [c.code, [c.perUSD, c.symbol, c.decimals, c.name]])));
+  const field = (side, lbl, code, n, extra) => `<div class="field fx-field${extra ? ' ' + extra : ''}"><small id="${uid}-${side}-l">${lbl}</small><div class="field-row"><input data-fx-in="${side}" inputmode="decimal" autocomplete="off" value="${fxFmt(code, n)}" aria-labelledby="${uid}-${side}-l" aria-describedby="${uid}-${side}-c"><span class="sr-only" id="${uid}-${side}-c">in ${fxMap[code].name}</span>
+        ${fxPicker(uid, side, code)}</div></div>`;
+  const r = rows === 'sm'
+    ? `<div class="rows sm"><div><span>Estimated exchange rate</span><b data-fx-rate>${fxRate(send, receive)}</b></div><div><span>Fees</span><b>Shown before you confirm</b></div><div><span>Delivery</span><b>Tracked to settlement</b></div></div>`
+    : `<div class="rows"><div><span>Estimated exchange rate</span><b data-fx-rate>${fxRate(send, receive)}</b></div><div><span>Transfer fee</span><b>Shown before you confirm</b></div><div><span>Estimated arrival</span><b>1–3 business days</b></div></div>`;
+  return `<form class="${cls} fx" data-fx data-send="${send}" data-receive="${receive}" data-rates='${rates}' onsubmit="return false"${reveal ? ` data-reveal style="--d:${reveal}"` : ''}>
+      ${over ? `<p class="w-over" style="margin-bottom:-4px">${over}</p>` : ''}
+      ${title ? `<h3 class="fx-title">${title}</h3>` : ''}
+      ${field('send', sendLabel, send, a)}
+      ${field('receive', receiveLabel, receive, out, recvCls)}
+      ${r}
+      <p class="fx-note">Indicative rates. You’ll see the live rate and fee before you confirm.</p>
+      <a class="btn btn-primary btn-block${btnCls ? ' ' + btnCls : ''}" href="{{SIGNUP}}">${cta}</a>
+    </form>`;
+};
+
 // ---- Blog -------------------------------------------------------------------------------
 const CATS = { guides: 'Guides', product: 'Product', compliance: 'Compliance' };
 const byDate = [...posts].sort((a, b) => b.date.localeCompare(a.date));
@@ -398,7 +435,7 @@ const postPage = (p) => {
 <!--@footer-->`;
 };
 
-const directives = { blogfeatured, blogposts, blogarchive, newsletter, head, nav, footer, ticker, cta, setsail, licences, explore, legaltabs, helpcards, contact, searchindex: searchIndex, searchbar: () => searchbar() };
+const directives = { calc, blogfeatured, blogposts, blogarchive, newsletter, head, nav, footer, ticker, cta, setsail, licences, explore, legaltabs, helpcards, contact, searchindex: searchIndex, searchbar: () => searchbar() };
 
 function render(src) {
   let out = src.replace(/<!--@(\w+)([^>]*?)-->/g, (m, name, a) => {

@@ -10,14 +10,7 @@
       <p class="lede" data-reveal style="--d:.2s">Send payments in your local currency. Your supplier receives USD, CNY or other major currencies, fast and at competitive rates.</p>
       <div class="btn-row" data-reveal style="--d:.3s"><a class="btn btn-primary" href="{{SIGNUP}}">Send money</a></div>
     </div>
-    <form class="calc" data-calc data-rate="208.33333" onsubmit="return false" data-reveal style="--d:.15s">
-      <p class="w-over" style="margin-bottom:-4px">Transaction calculator</p>
-      <h3 style="font-family:var(--display);font-weight:700;font-size:22px">Estimate your supplier payment</h3>
-      <label class="field"><small>You are sending</small><span class="field-row"><input inputmode="decimal" value="₦15,000,000.00" aria-label="Amount you are sending in NGN"><span class="cur">{{flag:NG:sm}}NGN</span></span></label>
-      <div class="field"><small>Supplier receives</small><div class="field-row"><strong data-out>¥72,000.00</strong><span class="cur">{{flag:CN:sm}}CNY</span></div></div>
-      <div class="rows sm"><div><span>Estimated exchange rate</span><b>1 CNY = ₦208.33</b></div><div><span>Fees</span><b>Shown before you confirm</b></div><div><span>Delivery</span><b>Tracked to settlement</b></div></div>
-      <a class="btn btn-primary btn-block" href="{{SIGNUP}}">Pay supplier</a>
-    </form>
+    <!--@calc reveal=".15s" over="Transaction calculator" title="Estimate your supplier payment" sendLabel="You are sending" receiveLabel="Supplier receives" send="NGN" amount="15000000" receive="CNY" rows="sm" cta="Pay supplier"-->
   </div>
 </section>
 
