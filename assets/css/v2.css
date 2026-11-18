@@ -297,7 +297,7 @@
 .sx-chip b { display: block; font-weight: 600; font-size: 14px; }
 .sx-chip small { font-size: 12px; color: var(--muted); }
 .sx-chip.c1 { left: -48px; top: 72px; } .sx-chip.c2 { right: -24px; top: 236px; animation-delay: 1.2s; } .sx-chip.c3 { left: -24px; top: 404px; animation-delay: 2.4s; }
-.sx-commit { padding-bottom: 56px; }
+.sx-commit { padding-bottom: 120px; }
 .sx-commit-grid { display: grid; grid-template-columns: 460px 1fr; gap: 96px; }
 .sx-row { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid #e9ecf2; }
 .sx-row:last-child { border-bottom: 0; }
